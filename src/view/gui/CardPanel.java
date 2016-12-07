@@ -9,12 +9,14 @@ import controller.Controller;
 public class CardPanel extends JPanel {
 	private Controller baseController;
 	//buttons and other things go here
-	
+	Choice choice;
 	private SpringLayout baseLayout;
 	
 	
 	public CardPanel(Controller baseController){
 		this.baseController = baseController;
+		
+		choice = new Choice();
 		//buttons and other things go here:
 		
 		setupPanel();
@@ -23,7 +25,8 @@ public class CardPanel extends JPanel {
 	}
 	
 	private void setupPanel(){
-		
+		this.setLayout(baseLayout);
+		this.add(choice);
 	}
 	
 	private void setupLayout(){
