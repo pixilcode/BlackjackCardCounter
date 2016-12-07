@@ -3,14 +3,20 @@ package controller;
 import model.cardDataTypes.Deck;
 import view.User;
 import view.UserInterface;
+import view.gui.CardFrame;
 
 public class Controller {
+	CardFrame baseFrame;
 	double startTime;
 	Deck myDeck;
+	UserInterface ui ;
+
 	
 	public Controller(){
+		baseFrame = new CardFrame(this);
 		startTime = (double)System.nanoTime();
 		myDeck = new Deck();
+		ui = new UserInterface();
 	}
 	
 	public void start(){
@@ -30,7 +36,6 @@ public class Controller {
 		User.println(myDeck.toString());
 		long endTime = System.nanoTime();
 		User.println(((float) (endTime - startTime)) / 1000000000 + " seconds");
-		UserInterface ui = new UserInterface();
 		ui.run();
 	}
 }
