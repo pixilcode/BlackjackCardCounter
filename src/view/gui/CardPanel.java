@@ -3,20 +3,22 @@ package view.gui;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-import view.gui.CardFrame;
+import view.gui.*;
 import controller.Controller;
 
 public class CardPanel extends JPanel {
 	private Controller baseController;
 	//buttons and other things go here
-	Choice choice;
+	private BlackJackPanel blackJackPanel;
+	private List gameList;
 	private SpringLayout baseLayout;
 	
 	
 	public CardPanel(Controller baseController){
 		this.baseController = baseController;
-		
-		choice = new Choice();
+		blackJackPanel = new BlackJackPanel(baseController);
+		gameList = new List();
+		baseLayout = new SpringLayout();
 		//buttons and other things go here:
 		
 		setupPanel();
@@ -25,13 +27,11 @@ public class CardPanel extends JPanel {
 	}
 	
 	private void setupPanel(){
-		this.setLayout(baseLayout);
-		this.add(choice);
+		setLayout(baseLayout);
+		add(gameList);
 	}
 	
 	private void setupLayout(){
-		//place to put pregenerated garbage
-		
 	}
 	
 	private void setupListeners(){
