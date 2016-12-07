@@ -5,8 +5,12 @@ import view.User;
 import view.UserInterface;
 
 public class Controller {
+	double startTime;
+	Deck myDeck;
+	
 	public Controller(){
-		
+		startTime = (double)System.nanoTime();
+		myDeck = new Deck();
 	}
 	
 	public void start(){
@@ -14,9 +18,6 @@ public class Controller {
 	}
 	
 	public void testRun(){
-		
-		long startTime = System.nanoTime();
-		Deck myDeck = new Deck();
 		User.println(myDeck.toString());
 		myDeck.remove("Hearts", '9');
 		myDeck.remove("Spades", 'K');
