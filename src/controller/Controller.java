@@ -1,15 +1,23 @@
 package controller;
 
-import model.cardDataTypes.*;
+import model.cardDataTypes.Deck;
 import view.User;
 import view.UserInterface;
 
-public class testRun {
+public class Controller {
+	double startTime;
+	Deck myDeck;
 	
-	public static void main(String args[]) {
-		
-		long startTime = System.nanoTime();
-		Deck myDeck = new Deck();
+	public Controller(){
+		startTime = (double)System.nanoTime();
+		myDeck = new Deck();
+	}
+	
+	public void start(){
+		this.testRun();
+	}
+	
+	public void testRun(){
 		User.println(myDeck.toString());
 		myDeck.remove("Hearts", '9');
 		myDeck.remove("Spades", 'K');
@@ -24,7 +32,5 @@ public class testRun {
 		User.println(((float) (endTime - startTime)) / 1000000000 + " seconds");
 		UserInterface ui = new UserInterface();
 		ui.run();
-		
 	}
-	
 }
