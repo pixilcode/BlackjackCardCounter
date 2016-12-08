@@ -10,22 +10,22 @@ public class CardPanel extends JPanel {
 	private Controller baseController;
 	//buttons and other things go here
 	private BlackJackPanel blackJackPanel;
-	private JList gameList;
-	private JButton modeBlackJack;
+	private JComboBox gameListBox;
 	private SpringLayout baseLayout;
 	
+	private String[] gameList;
 	
 	public CardPanel(Controller baseController){
 		this.baseController = baseController;
 		blackJackPanel = new BlackJackPanel(baseController);
-		gameList = new JList();
-		modeBlackJack = new JButton();
-		modeBlackJack.setText("BlackJack");
+		gameList = new String[] {"BlackJack"};
+		
+		 gameListBox = new JComboBox(gameList);
+		
 		baseLayout = new SpringLayout();
-		baseLayout.putConstraint(SpringLayout.NORTH, gameList, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, gameList, 10, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, gameList, 55, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, gameList, 104, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, gameListBox, 10, SpringLayout.NORTH, this);
+
+
 		//buttons and other things go here:
 		
 		setupPanel();
@@ -35,14 +35,24 @@ public class CardPanel extends JPanel {
 	
 	private void setupPanel(){
 		setLayout(baseLayout);
-		add(gameList);
-		gameList.add(modeBlackJack);
+		this.add(gameListBox);
 	}
 	
 	private void setupLayout(){
+		baseLayout.putConstraint(SpringLayout.WEST, gameListBox, 10, SpringLayout.WEST, this);
 	}
 	
 	private void setupListeners(){
-		
+		gameListBox.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				if(gameList[0].equals((String)gameListBox.getSelectedItem())){ //blackJack selected remove other game views and load blackjack view
+					
+				}
+				
+			}
+			 
+		});
 	}
 }
