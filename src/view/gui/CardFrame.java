@@ -1,6 +1,6 @@
 package view.gui;
 
-import java.swing.JFrame;
+import javax.swing.JFrame;
 
 public class CardFrame {
 
