@@ -18,7 +18,7 @@ public class Card implements Comparable<Card> {
 	
 	//Turn the card into a string
 	public String toString() {
-		return "[ " + value + ", " + symbol + " of " + suit + " ]";
+		return "[ " + symbol + " of " + suit + ", Value: " + value + " ]";
 	}
 	
 	//Get the suit
@@ -96,6 +96,7 @@ public class Card implements Comparable<Card> {
 			} else if(this.getSymbol() == 'J') {
 				
 				return -1;
+				
 			//If the given card symbol is 'K', return -1	
 			} else if(c.getSymbol() == 'K') {
 				
