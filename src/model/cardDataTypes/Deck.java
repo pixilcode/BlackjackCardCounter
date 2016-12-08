@@ -5,132 +5,99 @@ import java.util.ArrayList;
 public class Deck {
 	
 	//Declare variables
-	SuitSet[] deck;
-	int length = 0;
+	private ArrayList<Card> unseenDeck = new ArrayList<Card>();
+	private ArrayList<Card> seenDeck = new ArrayList<Card>();
+	private Card lastRemovedCard = new Card("", "", 0);
+	private boolean undo = false;
+	
+	//Create an array with standard strings in it
+	private String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	
 	//A constructor that gives the deck the four suits
 	public Deck() {
 		
-		deck = new SuitSet[4];
-		deck[0] = new SuitSet("Spades");
-		deck[1] = new SuitSet("Clubs");
-		deck[2] = new SuitSet("Diamonds");
-		deck[3] = new SuitSet("Hearts");
+		for(int i = 0; i < 52; i++) {
+			
+			String suit = "";
+			
+			//Set the suit according to 'i'
+			switch((i % 13)) {
+			
+			case 0:
+				suit = "SPADES";
+				break;
+			
+			case 1:
+				suit = "CLUBS";
+				break;
+			
+			case 2:
+				suit = "DIAMONDS";
+				break;
+			
+			case 3:
+				suit = "HEARTS";
+				break;
+			
+			}
+			
+			unseenDeck.add(new Card(suit, standardCardSymbols[i], i));
+			
+		}
 		
-		updateLength();
+		
 		
 	}
 	
 	public int length() {
 		
-		updateLength();
-		
-		return length;
-		
-	}
-	
-	private void updateLength() {
-		
-		Card[][] deckArray = to2DArray();
-		length = 0;
-		
-		for(int i = 0; i < deckArray.length; i++) {
-			
-			for(int j = 0; j < deckArray[i].length; j++) {
-				
-				length++;
-				
-			}
-			
-		}
+		return unseenDeck.size();
 		
 	}
 
 	public String toString() {
 		
-		String deckString = "";
-		
-		for(int i = 0; i < deck.length; i++) {
-			
-			deckString += (deck[i].toString() + "\n");
-			
-		}
-		
-		return deckString;
+		return unseenDeck.toString();
 		
 	}
 	
 	public Card[] to1DArray() {
 		
-		Card[][] deck2DArray = to2DArray();
-		ArrayList<Card> deck1DList = new ArrayList<Card>();
-		
-		for(int i = 0; i < deck2DArray.length; i++) {
-			
-			for(int j = 0; j < deck2DArray[i].length; j++) {
-				
-				deck1DList.add(deck2DArray[i][j]);
-				
-			}
-			
-		}
-		
-		Card[] deck1DArray = deck1DList.toArray(new Card[0]);
+		Card[] deck1DArray = new Card[unseenDeck.size()];
+		unseenDeck.toArray(deck1DArray);
 		
 		return deck1DArray;
 		
 	}
 	
-	public Card[][] to2DArray() {
-		
-		Card[][] deckArray = new Card[deck.length][13];
-		
-		for(int i = 0; i < deck.length; i++) {
-			
-			deckArray[i] = deck[i].toArray();
-			
-		}
-		
-		return deckArray;
-	}
-	
 	public void reset() {
 		
-		for(int i = 0; i < deck.length; i++) {
+		for(int i = 0; i < seenDeck.size(); i++) {
 			
-			deck[i].reset();
+			unseenDeck.add(seenDeck.get(i));
 			
 		}
 		
-		updateLength();
+		seenDeck.clear();
 		
 	}
 	
 	public void remove(Card card) {
 		
-		for(int i = 0; i < deck.length; i++) {
+		if(unseenDeck.contains(card)) {
 			
-			if((card.getSuit().toUpperCase()).charAt(0) == deck[i].getSymbol()) {
-				
-				deck[i].remove(card);
-				
-			}
-			
-		}
-		
-		if(to1DArray().length < 1) {
-			
-			reset();
+			unseenDeck.remove(card);
+			seenDeck.add(card);
+			lastRemovedCard = card;
+			undo = true;
 			
 		}
-		
-		updateLength();
 		
 	}
 	
-	public void remove(String suit, char symbolIn) {
+	public void remove(String suit, String symbolIn) {
 		
-		String symbol = Character.toString(symbolIn);
+		String symbol = symbolIn;
 		int value = 0;
 		
 		if(symbol.equals("K") || symbol.equals("Q") || symbol.equals("J")) {
@@ -143,19 +110,19 @@ public class Deck {
 			
 		}
 		
-		remove(new Card(suit, symbolIn, value));
+		remove(new Card(suit, symbol, value));
 		
 	}
 	
 	public void undo() {
 		
-		for(int i = 0; i < deck.length; i++) {
+		if(undo) {
 			
-			deck[i].undo();
+			unseenDeck.add(lastRemovedCard);
+			seenDeck.add(lastRemovedCard);
+			undo = false;
 			
 		}
-		
-		updateLength();
 		
 	}
 	
