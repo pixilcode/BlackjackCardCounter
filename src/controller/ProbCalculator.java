@@ -150,15 +150,7 @@ public class ProbCalculator {
 		
 		for(int i = 2; i <= 10; i++) {
 			
-			if(i < 10) {
-				
-				cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(deck, Integer.toString(i)));
-				
-			} else {
-				
-				cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(deck, Integer.toString(i)));
-				
-			}
+			cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(deck, Integer.toString(i)));
 			
 		}
 		
