@@ -120,19 +120,15 @@ public class ProbCalculator {
 	
 	private static float cardProbability(Deck deck, String symbol) {
 		
-		Card[][] deckArray = deck.to2DArray();
+		Card[] deckArray = deck.to1DArray();
 		float numberOfCards = 0;
 		
 		for(int i = 0; i < deckArray.length; i++) {
 			
-			for(int j = 0; j < deckArray[i].length; j++) {
+			if(deckArray[i].getSymbol() == symbol) {
 				
-				if(deckArray[i][j].getSymbol() == symbol) {
-					
-					numberOfCards++;
-					
-					
-				}
+				numberOfCards++;
+				
 				
 			}
 			

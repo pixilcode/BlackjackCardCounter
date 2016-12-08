@@ -19,11 +19,6 @@ public class Controller {
 	
 	public void testRun(){
 		User.println(myDeck.toString());
-		myDeck.remove("Hearts", '9');
-		myDeck.remove("Spades", 'K');
-		myDeck.remove("Diamonds", '3');
-		myDeck.remove("Clubs", '7');
-		myDeck.remove("Diamonds", 'K');
 		User.printData(ProbCalculator.calculate(myDeck, 10));
 		User.println(myDeck.toString());
 		myDeck.reset();
