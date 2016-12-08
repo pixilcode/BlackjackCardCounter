@@ -118,7 +118,7 @@ public class ProbCalculator {
 		
 	}
 	
-	private static float cardProbability(Deck deck, char symbol) {
+	private static float cardProbability(Deck deck, String symbol) {
 		
 		Card[][] deckArray = deck.to2DArray();
 		float numberOfCards = 0;
@@ -146,25 +146,25 @@ public class ProbCalculator {
 		
 		CardProb[] cardProbsArray = new CardProb[13];
 		
-		cardProbsArray[0] = new CardProb('A', cardProbability(deck, 'A'));
+		cardProbsArray[0] = new CardProb("A", cardProbability(deck, "A"));
 		
 		for(int i = 2; i <= 10; i++) {
 			
 			if(i < 10) {
 				
-				cardProbsArray[i - 1] = new CardProb(Integer.toString(i).charAt(0), cardProbability(deck, Integer.toString(i).charAt(0)));
+				cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(deck, Integer.toString(i)));
 				
 			} else {
 				
-				cardProbsArray[i - 1] = new CardProb(Integer.toString(i).charAt(1), cardProbability(deck, Integer.toString(i).charAt(1)));
+				cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(deck, Integer.toString(i)));
 				
 			}
 			
 		}
 		
-		cardProbsArray[10] = new CardProb('J', cardProbability(deck, 'J'));
-		cardProbsArray[11] = new CardProb('Q', cardProbability(deck, 'Q'));
-		cardProbsArray[12] = new CardProb('K', cardProbability(deck, 'K'));
+		cardProbsArray[10] = new CardProb("J", cardProbability(deck, "J"));
+		cardProbsArray[11] = new CardProb("Q", cardProbability(deck, "Q"));
+		cardProbsArray[12] = new CardProb("K", cardProbability(deck, "K"));
 		
 		return cardProbsArray;
 		
