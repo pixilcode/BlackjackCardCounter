@@ -7,11 +7,9 @@ public class Deck {
 	//Declare variables
 	private ArrayList<Card> unseenDeck = new ArrayList<Card>();
 	private ArrayList<Card> seenDeck = new ArrayList<Card>();
-	private Card lastRemovedCard = new Card("", "", 0);
-	private boolean undo = false;
 	
 	//Create an array with standard strings in it
-	private String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+	private static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	
 	//A constructor that gives the deck the four suits
 	public Deck() {
@@ -41,11 +39,12 @@ public class Deck {
 			
 			}
 			
-			unseenDeck.add(new Card(suit, standardCardSymbols[i], i));
+			unseenDeck.add(new Card(suit, standardCardSymbols[i], i + 1));
 			
 		}
 		
 		
+		unseenDeck.sort(null);
 		
 	}
 	
@@ -70,6 +69,74 @@ public class Deck {
 		
 	}
 	
+	public void addToDeck(Card card) {
+		
+		unseenDeck.add(card);
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void addToDeck(String suit, String symbol, int value) {
+		
+		addToDeck(new Card(suit, symbol, value));
+		
+	}
+	
+	public void addDeck(Deck deck) {
+		
+		Card[] deckArray = deck.to1DArray();
+		
+		for(int i = 0; i < deckArray.length; i++) {
+			
+			unseenDeck.add(deckArray[i]);
+			
+		}
+		
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void removeFromDeck(Card card) {
+		
+		if(unseenDeck.contains(card)) {
+			
+			unseenDeck.remove(card);
+			
+		} else if(seenDeck.contains(card)) {
+			
+			seenDeck.remove(card);
+			
+		}
+		
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void removeFromDeck(String suit, String symbol, int value) {
+		
+		removeFromDeck(new Card(suit, symbol, value));
+		
+	}
+	
+	public void add(Card card) {
+		
+		if(seenDeck.contains(card)) {
+			
+			seenDeck.remove(card);
+			unseenDeck.add(card);
+			
+		}
+		
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void add(String suit, String symbol, int value) {
+		
+		add(new Card(suit, symbol, value));
+		
+	}
+	
 	public void reset() {
 		
 		for(int i = 0; i < seenDeck.size(); i++) {
@@ -78,6 +145,7 @@ public class Deck {
 			
 		}
 		
+		unseenDeck.sort(null);
 		seenDeck.clear();
 		
 	}
@@ -88,41 +156,18 @@ public class Deck {
 			
 			unseenDeck.remove(card);
 			seenDeck.add(card);
-			lastRemovedCard = card;
-			undo = true;
 			
 		}
 		
-	}
-	
-	public void remove(String suit, String symbolIn) {
-		
-		String symbol = symbolIn;
-		int value = 0;
-		
-		if(symbol.equals("K") || symbol.equals("Q") || symbol.equals("J")) {
-			
-			value = 10;
-			
-		} else {
-			
-			value = Integer.parseInt(symbol);
-			
-		}
-		
-		remove(new Card(suit, symbol, value));
+		unseenDeck.sort(null);
 		
 	}
 	
 	public void undo() {
 		
-		if(undo) {
-			
-			unseenDeck.add(lastRemovedCard);
-			seenDeck.add(lastRemovedCard);
-			undo = false;
-			
-		}
+		Card undoneCard = seenDeck.remove(seenDeck.size() - 1);
+		unseenDeck.add(undoneCard);
+		unseenDeck.sort(null);
 		
 	}
 	
