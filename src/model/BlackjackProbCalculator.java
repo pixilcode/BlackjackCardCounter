@@ -1,14 +1,12 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 
-import model.CardProb;
-import model.Data;
 import model.cardDataTypes.*;
 import model.sumDataTypes.*;
 import view.User;
 
-public class ProbCalculator {
+public class BlackjackProbCalculator {
 	
 	private static int possibleSums = 0;
 	
