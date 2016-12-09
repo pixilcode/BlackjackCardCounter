@@ -12,7 +12,7 @@ public class Deck {
 	private static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	
 	//A constructor that gives the deck the four suits
-	public Deck() {
+	public Deck(boolean addJokers) {
 		
 		for(int i = 0; i < 52; i++) {
 			
@@ -43,6 +43,11 @@ public class Deck {
 			
 		}
 		
+		if(addJokers) {
+			
+			unseenDeck.add(new Card("JOKER", "JK", 0));
+			
+		}
 		
 		unseenDeck.sort(null);
 		

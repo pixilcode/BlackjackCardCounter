@@ -1,5 +1,6 @@
 package controller;
 
+import model.BlackjackProbCalculator;
 import model.cardDataTypes.Deck;
 import view.User;
 import view.UserInterface;
@@ -10,7 +11,7 @@ public class Controller {
 	
 	public Controller(){
 		startTime = (double)System.nanoTime();
-		myDeck = new Deck();
+		myDeck = new Deck(false);
 	}
 	
 	public void start(){
@@ -19,7 +20,7 @@ public class Controller {
 	
 	public void testRun(){
 		User.println(myDeck.toString());
-		User.printData(ProbCalculator.calculate(myDeck, 10));
+		User.printData(BlackjackProbCalculator.calculate(myDeck, 10));
 		User.println(myDeck.toString());
 		myDeck.reset();
 		User.println(myDeck.toString());
