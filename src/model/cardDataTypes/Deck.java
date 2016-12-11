@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class Deck {
 	
 	//Declare variables
-	private ArrayList<Card> unseenDeck = new ArrayList<Card>();
-	private ArrayList<Card> seenDeck = new ArrayList<Card>();
+	protected ArrayList<Card> unseenDeck = new ArrayList<Card>();
+	protected ArrayList<Card> seenDeck = new ArrayList<Card>();
 	
 	//Create an array with standard strings in it
-	private static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+	protected static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	
 	//A constructor that gives the deck the four suits
 	public Deck(boolean addJokers) {
@@ -65,12 +65,12 @@ public class Deck {
 		
 	}
 	
-	public Card[] to1DArray() {
+	public Card[] toArray() {
 		
-		Card[] deck1DArray = new Card[unseenDeck.size()];
-		unseenDeck.toArray(deck1DArray);
+		Card[] deckArray = new Card[unseenDeck.size()];
+		unseenDeck.toArray(deckArray);
 		
-		return deck1DArray;
+		return deckArray;
 		
 	}
 	
@@ -89,7 +89,7 @@ public class Deck {
 	
 	public void addDeck(Deck deck) {
 		
-		Card[] deckArray = deck.to1DArray();
+		Card[] deckArray = deck.toArray();
 		
 		for(int i = 0; i < deckArray.length; i++) {
 			
@@ -165,6 +165,12 @@ public class Deck {
 		}
 		
 		unseenDeck.sort(null);
+		
+	}
+	
+	public void remove(String suit, String symbol, int value) {
+		
+		remove(new Card(suit, symbol, value));
 		
 	}
 	

@@ -33,7 +33,7 @@ public class BlackjackProbCalculator {
 		
 		int lessThan = 21 - knownSum;
 		Card[] sumOf21;
-		sumOf21 = deck.to1DArray();
+		sumOf21 = deck.toArray();
 		int lessThan21 = 0;
 		
 		for(int i = 0; i < sumOf21.length; i++) {
@@ -63,7 +63,7 @@ public class BlackjackProbCalculator {
 	private static SumCount[] sums(Deck deck, int knownSum) {
 		
 		Card[] sumOf21;
-		sumOf21 = deck.to1DArray();
+		sumOf21 = deck.toArray();
 		ArrayList<SumCount> sumsList = new ArrayList<SumCount>();
 		possibleSums = 0;
 		
@@ -118,7 +118,7 @@ public class BlackjackProbCalculator {
 	
 	private static float cardProbability(Deck deck, String symbol) {
 		
-		Card[] deckArray = deck.to1DArray();
+		Card[] deckArray = deck.toArray();
 		float numberOfCards = 0;
 		
 		for(int i = 0; i < deckArray.length; i++) {
