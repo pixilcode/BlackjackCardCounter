@@ -1,12 +1,10 @@
 package view;
 
 import model.cardDataTypes.Deck;
-import model.cardDataTypes.Card;
-import controller.ProbCalculator;
 
 public class UserInterface {
 	
-	Deck deck = new Deck();
+	Deck deck = new Deck(false);
 	
 	//No initialization
 	public UserInterface() {
