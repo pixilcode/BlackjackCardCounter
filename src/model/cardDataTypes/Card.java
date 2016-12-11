@@ -1,14 +1,16 @@
 package model.cardDataTypes;
 
+import model.Suit;
+
 public class Card implements Comparable<Card> {
 	
 	//Declare variables
-	private String suit;
+	private Suit suit;
 	private String symbol;
 	private int value;
 	
 	//Constructor assigns suit, symbol, and value to the card
-	public Card(String suit, String symbol, int value) {
+	public Card(Suit suit, String symbol, int value) {
 		
 		this.suit = suit;
 		this.symbol = symbol;
@@ -24,7 +26,7 @@ public class Card implements Comparable<Card> {
 	//Get the suit
 	public String getSuit() {
 		
-		return suit;
+		return suit.toString();
 		
 	}
 	

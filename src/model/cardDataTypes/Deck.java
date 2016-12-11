@@ -2,6 +2,8 @@ package model.cardDataTypes;
 
 import java.util.ArrayList;
 
+import model.Suit;
+
 public class Deck {
 	
 	//Declare variables
@@ -16,25 +18,25 @@ public class Deck {
 		
 		for(int i = 0; i < 52; i++) {
 			
-			String suit = "";
+			Suit suit = Suit.SPADES;
 			
 			//Set the suit according to 'i'
 			switch((i % 13)) {
 			
 			case 0:
-				suit = "SPADES";
+				suit = Suit.SPADES;
 				break;
 			
 			case 1:
-				suit = "CLUBS";
+				suit = Suit.CLUBS;
 				break;
 			
 			case 2:
-				suit = "DIAMONDS";
+				suit = Suit.DIAMONDS;
 				break;
 			
 			case 3:
-				suit = "HEARTS";
+				suit = Suit.HEARTS;
 				break;
 			
 			}
@@ -45,7 +47,7 @@ public class Deck {
 		
 		if(addJokers) {
 			
-			unseenDeck.add(new Card("JOKER", "JK", 0));
+			unseenDeck.add(new Card(Suit.JOKER, "JK", 0));
 			
 		}
 		
@@ -83,7 +85,7 @@ public class Deck {
 	
 	public void addToDeck(String suit, String symbol, int value) {
 		
-		addToDeck(new Card(suit, symbol, value));
+		addToDeck(new Card(Suit.valueOf(suit), symbol, value));
 		
 	}
 	
@@ -119,7 +121,7 @@ public class Deck {
 	
 	public void removeFromDeck(String suit, String symbol, int value) {
 		
-		removeFromDeck(new Card(suit, symbol, value));
+		removeFromDeck(new Card(Suit.valueOf(suit), symbol, value));
 		
 	}
 	
@@ -138,7 +140,7 @@ public class Deck {
 	
 	public void add(String suit, String symbol, int value) {
 		
-		add(new Card(suit, symbol, value));
+		add(new Card(Suit.valueOf(suit), symbol, value));
 		
 	}
 	
@@ -170,7 +172,7 @@ public class Deck {
 	
 	public void remove(String suit, String symbol, int value) {
 		
-		remove(new Card(suit, symbol, value));
+		remove(new Card(Suit.valueOf(suit), symbol, value));
 		
 	}
 	
