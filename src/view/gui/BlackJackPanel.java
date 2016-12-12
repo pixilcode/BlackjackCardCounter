@@ -24,12 +24,44 @@ public class BlackJackPanel extends GamePanel{
 	private JButton addQueen;
 	private JButton addKing;
 	
+	private JLabel winningPercentLabel;
+	private JLabel lessThanPercentLabel;
+	private JLabel greaterThanPercentLabel;
+	
+	private JLabel[] amountLabels;
+	private JLabel amountOfAces;
+	private JLabel amountOfTwos;
+	private JLabel amountOfThrees;
+	private JLabel amountOfFours;
+	private JLabel amountOfFives;
+	private JLabel amountOfSixes;
+	private JLabel amountOfSevens;
+	private JLabel amountOfEights;
+	private JLabel amountOfNines;
+	private JLabel amountOfTens;
+	private JLabel amountOfJacks;
+	private JLabel amountOfQueens;
+	private JLabel amountOfKings;
+	
 	private SpringLayout baseLayout;
 	
 	BlackJackPanel(Controller baseController){
 		this.baseController = baseController;
 		
-		addCardButtons = new JButton[]{addAce = new JButton()
+		this.initButtons();
+		this.initLabels();
+		
+		this.baseLayout = new SpringLayout();
+
+
+		
+		setupPanel();
+		setupLayout();
+		setupListeners();
+	}
+	
+	private void initButtons(){
+		this.addCardButtons = new JButton[]{addAce = new JButton()
 				,addTwo = new JButton()
 				,addThree = new JButton()
 				,addFour = new JButton()
@@ -42,14 +74,29 @@ public class BlackJackPanel extends GamePanel{
 				,addJack = new JButton()
 				,addQueen = new JButton()
 				,addKing = new JButton()};
-		
-		this.baseLayout = new SpringLayout();
-
-
-		
-		setupPanel();
-		setupLayout();
-		setupListeners();
+	}
+	
+	private void initLabels(){
+		this.winningPercentLabel = 		new JLabel();
+		this.lessThanPercentLabel = 	new JLabel();
+		this.greaterThanPercentLabel = 	new JLabel();
+		this.amountLabels = new JLabel[]{
+				this.amountOfAces = 			new JLabel(),
+				this.amountOfTwos = 			new JLabel(),
+				this.amountOfThrees = 			new JLabel(),
+				this.amountOfFours = 			new JLabel(),
+				this.amountOfFives = 			new JLabel(),
+				this.amountOfSixes = 			new JLabel(),
+				this.amountOfSevens = 			new JLabel(),
+				this.amountOfEights = 			new JLabel(),
+				this.amountOfNines = 			new JLabel(),
+				this.amountOfTens = 			new JLabel(),
+				this.amountOfJacks = 			new JLabel(),
+				this.amountOfQueens = 			new JLabel(),
+				this.amountOfKings = 			new JLabel(),};
+		for(int i = 0; i < amountLabels.length -1; i++){
+			amountLabels[i].setText("0");
+		}
 	}
 	
 	private void setupPanel(){
@@ -67,9 +114,40 @@ public class BlackJackPanel extends GamePanel{
 		this.add(addCardButtons[10]);
 		this.add(addCardButtons[11]);
 		this.add(addCardButtons[12]);
+		this.add(winningPercentLabel);
+		this.add(lessThanPercentLabel);
+		this.add(greaterThanPercentLabel);
+		this.add(amountOfAces);
+		this.add(amountOfTwos);
+		this.add(amountOfThrees);
+		this.add(amountOfFours);
+		this.add(amountOfFives);
+		this.add(amountOfSixes);
+		this.add(amountOfSevens);
+		this.add(amountOfEights);
+		this.add(amountOfNines);
+		this.add(amountOfTens);
+		this.add(amountOfJacks);
+		this.add(amountOfQueens);
+		this.add(amountOfKings);
 	}
 	
 	private void setupLayout(){
+		setBackground(Color.LIGHT_GRAY);
+		addKing.setBackground(Color.LIGHT_GRAY);
+		addQueen.setBackground(Color.LIGHT_GRAY);
+		addJack.setBackground(Color.LIGHT_GRAY);
+		addTen.setBackground(Color.LIGHT_GRAY);
+		addNine.setBackground(Color.LIGHT_GRAY);
+		addEight.setBackground(Color.LIGHT_GRAY);
+		addSeven.setBackground(Color.LIGHT_GRAY);
+		addSix.setBackground(Color.LIGHT_GRAY);
+		addFive.setBackground(Color.LIGHT_GRAY);
+		addFour.setBackground(Color.LIGHT_GRAY);
+		addThree.setBackground(Color.LIGHT_GRAY);
+		addTwo.setBackground(Color.LIGHT_GRAY);
+		addAce.setBackground(Color.LIGHT_GRAY);
+		
 		addKing.setText("King");
 		addQueen.setText("Queen");
 		addJack.setText("Jack");
@@ -123,9 +201,46 @@ public class BlackJackPanel extends GamePanel{
 		baseLayout.putConstraint(SpringLayout.NORTH, addSeven, 6, SpringLayout.SOUTH, addSix);
 		baseLayout.putConstraint(SpringLayout.NORTH, addEight, 6, SpringLayout.SOUTH, addSeven);
 		baseLayout.putConstraint(SpringLayout.EAST, addSeven, 75, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfAces, 4, SpringLayout.NORTH, addAce);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfAces, 6, SpringLayout.EAST, addAce);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfTwos, 4, SpringLayout.NORTH, addTwo);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfTwos, 6, SpringLayout.EAST, addTwo);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfThrees, 4, SpringLayout.NORTH, addThree);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfThrees, 6, SpringLayout.EAST, addThree);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfFours, 4, SpringLayout.NORTH, addFour);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfFours, 6, SpringLayout.EAST, addFour);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfFives, 4, SpringLayout.NORTH, addFive);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfFives, 6, SpringLayout.EAST, addFive);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfSixes, 4, SpringLayout.NORTH, addSix);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfSixes, 6, SpringLayout.EAST, addSix);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfSevens, 4, SpringLayout.NORTH, addSeven);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfSevens, 6, SpringLayout.EAST, addSeven);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfEights, 4, SpringLayout.NORTH, addEight);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfEights, 6, SpringLayout.EAST, addEight);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfNines, 4, SpringLayout.NORTH, addNine);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfNines, 6, SpringLayout.EAST, addNine);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfTens, 4, SpringLayout.NORTH, addTen);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfTens, 6, SpringLayout.EAST, addTen);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfJacks, 4, SpringLayout.NORTH, addJack);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfJacks, 6, SpringLayout.EAST, addJack);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfQueens, 4, SpringLayout.NORTH, addQueen);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfQueens, 6, SpringLayout.EAST, addQueen);
+		baseLayout.putConstraint(SpringLayout.NORTH, amountOfKings, 4, SpringLayout.NORTH, addKing);
+		baseLayout.putConstraint(SpringLayout.WEST, amountOfKings, 6, SpringLayout.EAST, addKing);
 	}
 	
 	private void setupListeners(){
+		for(int i = 0; i < addCardButtons.length -1; i++){
+			this.addCardButtons[i].addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent clicked) {
+					//this listener is meant to get the amount of seen cards of each type and add cards to the seen deck of the blackjack game.
+					//Update the percentages of things happening
+				}
+		
+			});
+		}
 		
 	}
 	
