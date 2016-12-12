@@ -62,7 +62,8 @@ public class BlackJackPanel extends GamePanel{
 	}
 	
 	private void initButtons(){
-		this.addCardButtons = new JButton[]{addAce = new JButton()
+		this.addCardButtons = new JButton[]{
+				addAce = new JButton()
 				,addTwo = new JButton()
 				,addThree = new JButton()
 				,addFour = new JButton()
@@ -115,19 +116,19 @@ public class BlackJackPanel extends GamePanel{
 	
 	private void setupLayout(){
 		setBackground(Color.LIGHT_GRAY);
-		addKing.setBackground(Color.LIGHT_GRAY);
-		addQueen.setBackground(Color.LIGHT_GRAY);
-		addJack.setBackground(Color.LIGHT_GRAY);
-		addTen.setBackground(Color.LIGHT_GRAY);
-		addNine.setBackground(Color.LIGHT_GRAY);
-		addEight.setBackground(Color.LIGHT_GRAY);
-		addSeven.setBackground(Color.LIGHT_GRAY);
-		addSix.setBackground(Color.LIGHT_GRAY);
-		addFive.setBackground(Color.LIGHT_GRAY);
-		addFour.setBackground(Color.LIGHT_GRAY);
-		addThree.setBackground(Color.LIGHT_GRAY);
-		addTwo.setBackground(Color.LIGHT_GRAY);
-		addAce.setBackground(Color.LIGHT_GRAY);
+		addKing.setBackground(Color.WHITE);
+		addQueen.setBackground(Color.WHITE);
+		addJack.setBackground(Color.WHITE);
+		addTen.setBackground(Color.WHITE);
+		addNine.setBackground(Color.WHITE);
+		addEight.setBackground(Color.WHITE);
+		addSeven.setBackground(Color.WHITE);
+		addSix.setBackground(Color.WHITE);
+		addFive.setBackground(Color.WHITE);
+		addFour.setBackground(Color.WHITE);
+		addThree.setBackground(Color.WHITE);
+		addTwo.setBackground(Color.WHITE);
+		addAce.setBackground(Color.WHITE);
 		
 		addKing.setText("King");
 		addQueen.setText("Queen");

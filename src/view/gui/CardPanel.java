@@ -3,13 +3,14 @@ package view.gui;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-import view.gui.*;
 import controller.Controller;
 
+@SuppressWarnings({ "unused", "serial" })
 public class CardPanel extends JPanel {
 	private Controller baseController;
 	//buttons and other things go here
 	private BlackJackPanel blackJackPanel;
+	private TexasHoldemPanel texasHoldemPanel;
 	private GamePanel gamePanel;//339x315
 	
 	private JButton resetButton;
@@ -18,19 +19,22 @@ public class CardPanel extends JPanel {
 	private SpringLayout baseLayout;
 	
 	private String[] gameList;
+	private JLayeredPane layeredPane;
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CardPanel(Controller baseController){
 		this.baseController = baseController;
 		blackJackPanel = new BlackJackPanel(baseController);
+		texasHoldemPanel = new TexasHoldemPanel(baseController);
+		
 		gamePanel = blackJackPanel;
+		
 		gameList = new String[] {"BlackJack","TexasHoldem"};
-		
-		resetButton = new JButton();
-		resetButton.setText("RESET");
-		
+		resetButton = new JButton();		
 		gameListBox = new JComboBox(gameList);
 		
 		baseLayout = new SpringLayout();
+		layeredPane = new JLayeredPane();
 
 		//buttons and other things go here:
 		
@@ -42,12 +46,16 @@ public class CardPanel extends JPanel {
 	private void setupPanel(){
 		setLayout(baseLayout);
 		this.add(gameListBox);
+		this.gameListBox.setEnabled(true);
 		this.add(gamePanel);
-		this.add(resetButton);
-		
+		this.add(resetButton);		
+		this.resetButton.setEnabled(true);
+		this.add(layeredPane);
 	}
 	
 	private void setupLayout(){//place to put generated garbage
+		resetButton.setText("RESET");
+		resetButton.setBackground(Color.LIGHT_GRAY);
 		baseLayout.putConstraint(SpringLayout.NORTH, resetButton, 30, SpringLayout.SOUTH, gameListBox);
 		baseLayout.putConstraint(SpringLayout.EAST, resetButton, 0, SpringLayout.EAST, gameListBox);
 		baseLayout.putConstraint(SpringLayout.WEST, gameListBox, 10, SpringLayout.WEST, this);
@@ -56,25 +64,9 @@ public class CardPanel extends JPanel {
 		baseLayout.putConstraint(SpringLayout.WEST, gamePanel, 6, SpringLayout.EAST, gameListBox);
 		baseLayout.putConstraint(SpringLayout.EAST, blackJackPanel, -6, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, blackJackPanel, 325, SpringLayout.NORTH, this);
-
 	}
 	
 	private void setupListeners(){
-		gameListBox.addItemListener(new ItemListener(){
-
-			@Override
-			public void itemStateChanged(ItemEvent arg0) {
-				if(gameList[0].equals((String)gameListBox.getSelectedItem())){ //blackJack selected remove other game views and load blackjack view
-					setGamePanel(blackJackPanel);
-				}
-				
-			}
-			public void setGamePanel(GamePanel panel){
-				gamePanel = panel;
-			}
-			 
-		});// listener that listens for game changes
-		
 		resetButton.addActionListener(new ActionListener(){
 
 			@Override

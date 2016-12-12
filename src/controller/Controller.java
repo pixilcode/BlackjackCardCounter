@@ -20,7 +20,7 @@ public class Controller {
 	}
 	
 	public void start(){
-		this.testRun();
+//	this.testRun();
 	}
 	
 	public void testRun(){
