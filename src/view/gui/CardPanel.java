@@ -27,7 +27,7 @@ public class CardPanel extends JPanel {
 		blackJackPanel = new BlackJackPanel(baseController);
 		texasHoldemPanel = new TexasHoldemPanel(baseController);
 		
-		gamePanel = blackJackPanel;
+		gamePanel = new GamePanel();
 		
 		gameList = new String[] {"BlackJack","TexasHoldem"};
 		resetButton = new JButton();		
@@ -75,9 +75,23 @@ public class CardPanel extends JPanel {
 			}
 			public void resetGamePanel(){
 				gamePanel.reset();
+				setGamePanel(blackJackPanel);
 			}
 			
 		});
 		
+	}
+	private void setGamePanel(GamePanel panel){
+		this.gamePanel.setVisible(false);
+		this.remove(gamePanel);
+		gamePanel = panel;
+		this.add(gamePanel);
+		this.gamePanel.invalidate();
+		this.gamePanel.validate();
+		baseLayout.putConstraint(SpringLayout.NORTH, gamePanel, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, gamePanel, 6, SpringLayout.EAST, gameListBox);
+		baseLayout.putConstraint(SpringLayout.EAST, blackJackPanel, -6, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, blackJackPanel, 325, SpringLayout.NORTH, this);
+		this.gamePanel.setVisible(true);
 	}
 }
