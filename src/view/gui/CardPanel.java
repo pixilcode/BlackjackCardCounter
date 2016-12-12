@@ -9,8 +9,6 @@ import controller.Controller;
 public class CardPanel extends JPanel {
 	private Controller baseController;
 	//buttons and other things go here
-	private BlackJackPanel blackJackPanel;
-	private TexasHoldemPanel texasHoldemPanel;
 	private GamePanel gamePanel;//339x315
 	
 	private JButton resetButton;
@@ -24,10 +22,8 @@ public class CardPanel extends JPanel {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public CardPanel(Controller baseController){
 		this.baseController = baseController;
-		blackJackPanel = new BlackJackPanel(baseController);
-		texasHoldemPanel = new TexasHoldemPanel(baseController);
 		
-		gamePanel = new GamePanel();
+		gamePanel = new BlackJackPanel(baseController);
 		
 		gameList = new String[] {"BlackJack","TexasHoldem"};
 		resetButton = new JButton();		
@@ -60,13 +56,29 @@ public class CardPanel extends JPanel {
 		baseLayout.putConstraint(SpringLayout.EAST, resetButton, 0, SpringLayout.EAST, gameListBox);
 		baseLayout.putConstraint(SpringLayout.WEST, gameListBox, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.NORTH, gameListBox, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, gamePanel, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, gamePanel, 0, SpringLayout.NORTH, gameListBox);
 		baseLayout.putConstraint(SpringLayout.WEST, gamePanel, 6, SpringLayout.EAST, gameListBox);
-		baseLayout.putConstraint(SpringLayout.EAST, blackJackPanel, -6, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, blackJackPanel, 325, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, gamePanel, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, gamePanel, -10, SpringLayout.EAST, this);
 	}
 	
 	private void setupListeners(){
+		gameListBox.addItemListener(new ItemListener(){
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				if(arg0.getStateChange() == ItemEvent.SELECTED){
+					if(gameListBox.getSelectedItem().equals(gameList[0])){
+						BlackJackPanel blackJackPanel = new BlackJackPanel(baseController);
+						setGamePanel(blackJackPanel);
+					}else if(gameListBox.getSelectedItem().equals(gameList[1])){
+						TexasHoldemPanel texasHoldemPanel = new TexasHoldemPanel(baseController);
+						setGamePanel(texasHoldemPanel);
+					}
+				}
+			}
+		});
+		
+		
 		resetButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -75,9 +87,7 @@ public class CardPanel extends JPanel {
 			}
 			public void resetGamePanel(){
 				gamePanel.reset();
-				setGamePanel(blackJackPanel);
 			}
-			
 		});
 		
 	}
@@ -88,10 +98,10 @@ public class CardPanel extends JPanel {
 		this.add(gamePanel);
 		this.gamePanel.invalidate();
 		this.gamePanel.validate();
-		baseLayout.putConstraint(SpringLayout.NORTH, gamePanel, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.NORTH, gamePanel, 0, SpringLayout.NORTH, gameListBox);
 		baseLayout.putConstraint(SpringLayout.WEST, gamePanel, 6, SpringLayout.EAST, gameListBox);
-		baseLayout.putConstraint(SpringLayout.EAST, blackJackPanel, -6, SpringLayout.EAST, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, blackJackPanel, 325, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, gamePanel, -10, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, gamePanel, -10, SpringLayout.EAST, this);
 		this.gamePanel.setVisible(true);
 	}
 }
