@@ -6,6 +6,7 @@ import java.awt.*;
 import view.gui.CardFrame;
 import controller.Controller;
 
+@SuppressWarnings("serial")
 public class BlackJackPanel extends GamePanel{
 	Controller baseController;
 	
@@ -94,42 +95,22 @@ public class BlackJackPanel extends GamePanel{
 				this.amountOfJacks = 			new JLabel(),
 				this.amountOfQueens = 			new JLabel(),
 				this.amountOfKings = 			new JLabel(),};
-		for(int i = 0; i < amountLabels.length -1; i++){
+		for(int i = 0; i < amountLabels.length; i++){
 			amountLabels[i].setText("0");
 		}
 	}
 	
 	private void setupPanel(){
 		this.setLayout(baseLayout);
-		this.add(addCardButtons[0]);
-		this.add(addCardButtons[1]);
-		this.add(addCardButtons[2]);
-		this.add(addCardButtons[3]);
-		this.add(addCardButtons[4]);
-		this.add(addCardButtons[5]);
-		this.add(addCardButtons[6]);
-		this.add(addCardButtons[7]);
-		this.add(addCardButtons[8]);
-		this.add(addCardButtons[9]);
-		this.add(addCardButtons[10]);
-		this.add(addCardButtons[11]);
-		this.add(addCardButtons[12]);
+		for(int i =0; i < this.addCardButtons.length; i++){
+			this.add(addCardButtons[i]);
+		}
+		for(int i = 0; i < this.amountLabels.length; i ++){
+			this.add(amountLabels[i]);
+		}
 		this.add(winningPercentLabel);
 		this.add(lessThanPercentLabel);
 		this.add(greaterThanPercentLabel);
-		this.add(amountOfAces);
-		this.add(amountOfTwos);
-		this.add(amountOfThrees);
-		this.add(amountOfFours);
-		this.add(amountOfFives);
-		this.add(amountOfSixes);
-		this.add(amountOfSevens);
-		this.add(amountOfEights);
-		this.add(amountOfNines);
-		this.add(amountOfTens);
-		this.add(amountOfJacks);
-		this.add(amountOfQueens);
-		this.add(amountOfKings);
 	}
 	
 	private void setupLayout(){
@@ -230,7 +211,7 @@ public class BlackJackPanel extends GamePanel{
 	}
 	
 	private void setupListeners(){
-		for(int i = 0; i < addCardButtons.length -1; i++){
+		for(int i = 0; i < addCardButtons.length; i++){
 			this.addCardButtons[i].addActionListener(new ActionListener(){
 
 				@Override
