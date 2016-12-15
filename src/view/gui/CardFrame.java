@@ -2,7 +2,7 @@ package view.gui;
 
 import javax.swing.JFrame;
 import controller.Controller;
-import view.gui.CardPane;
+import view.gui.CardPanel;
 
 public class CardFrame extends JFrame{
 	private Controller baseController;
