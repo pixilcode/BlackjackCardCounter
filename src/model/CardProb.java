@@ -2,17 +2,17 @@ package model;
 
 public class CardProb {
 	
-	char symbol;
+	String symbol;
 	float prob;
 	
-	public CardProb(char symbol, float prob) {
+	public CardProb(String symbol, float prob) {
 		
 		this.symbol = symbol;
 		this.prob = prob;
 		
 	}
 
-	public char getSymbol() {
+	public String getSymbol() {
 		
 		return symbol;
 		

@@ -1,42 +1,72 @@
 package controller;
 
-import model.cardDataTypes.Deck;
-import view.User;
-import view.UserInterface;
-import view.gui.CardFrame;
+import model.*;
+import model.cardDataTypes.*;
 
 public class Controller {
-	CardFrame baseFrame;
 	double startTime;
-	Deck myDeck;
-	UserInterface ui ;
-
+	BlackjackGame bjGame;
 	
 	public Controller(){
-		baseFrame = new CardFrame(this);
-		startTime = (double)System.nanoTime();
-		myDeck = new Deck();
-		ui = new UserInterface();
+		startTime = (double) System.nanoTime();
+		bjGame = new BlackjackGame();
 	}
 	
 	public void start(){
-//	this.testRun();
+		
+	}
+	
+	//Blackjack commands
+	
+	
+	public Object blackjackGame(String command, Object[] args) {
+		
+		switch(command) {
+		
+		//Get the length
+		case "getLength":
+			return bjGame.length();
+		
+		//Create a way to get a 'Suit' enum
+		case "getSuit":
+			switch(((String) args[0]).toUpperCase()) {
+			
+			case "SPADES":
+				return Suit.SPADES;
+			
+			case "CLUBS":
+				return Suit.CLUBS;
+			
+			case "DIAMONDS":
+				return Suit.DIAMONDS;
+			
+			case "HEARTS":
+				return Suit.HEARTS;
+			
+			default:
+				return null;
+			
+			}
+		
+		//Add a card to the deck
+		case "addToDeck":
+			bjGame.addToDeck(new Card((Suit) args[1], (String) args[2], (int) args[3] ));
+			return null;
+		
+		
+		}
+		
+		return "INVALID";
+		
+	}
+	
+	public void remove() {
+		
+		
+		
 	}
 	
 	public void testRun(){
-		User.println(myDeck.toString());
-		myDeck.remove("Hearts", '9');
-		myDeck.remove("Spades", 'K');
-		myDeck.remove("Diamonds", '3');
-		myDeck.remove("Clubs", '7');
-		myDeck.remove("Diamonds", 'K');
-		User.printData(ProbCalculator.calculate(myDeck, 10));
-		User.println(myDeck.toString());
-		myDeck.reset();
-		User.println(myDeck.toString());
-		long endTime = System.nanoTime();
-		User.println(((float) (endTime - startTime)) / 1000000000 + " seconds");
-		ui.run();
+		
 	}
-	
 }

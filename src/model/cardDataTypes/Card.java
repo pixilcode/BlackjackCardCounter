@@ -1,14 +1,16 @@
 package model.cardDataTypes;
 
+import model.Suit;
+
 public class Card implements Comparable<Card> {
 	
 	//Declare variables
-	private String suit;
-	private char symbol;
+	private Suit suit;
+	private String symbol;
 	private int value;
 	
 	//Constructor assigns suit, symbol, and value to the card
-	public Card(String suit, char symbol, int value) {
+	public Card(Suit suit, String symbol, int value) {
 		
 		this.suit = suit;
 		this.symbol = symbol;
@@ -24,12 +26,12 @@ public class Card implements Comparable<Card> {
 	//Get the suit
 	public String getSuit() {
 		
-		return suit;
+		return suit.toString();
 		
 	}
 	
 	//Get the symbol
-	public char getSymbol() {
+	public String getSymbol() {
 		
 		return symbol;
 		
@@ -88,22 +90,22 @@ public class Card implements Comparable<Card> {
 				return 0;
 				
 			//If this card symbol is 'K', return 1
-			} else if(this.getSymbol() == 'K') {
+			} else if(this.getSymbol() == "K") {
 				
 				return 1;
 				
 			//If this card symbol is 'J', return -1
-			} else if(this.getSymbol() == 'J') {
+			} else if(this.getSymbol() == "J") {
 				
 				return -1;
 				
 			//If the given card symbol is 'K', return -1	
-			} else if(c.getSymbol() == 'K') {
+			} else if(c.getSymbol() == "K") {
 				
 				return -1;
 				
 			//If the given card symbol is 'J', return 1
-			} else if(c.getSymbol() == 'J') {
+			} else if(c.getSymbol() == "J") {
 				
 				return 1;
 				

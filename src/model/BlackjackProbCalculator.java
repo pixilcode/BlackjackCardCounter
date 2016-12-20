@@ -1,14 +1,12 @@
-package controller;
+package model;
 
 import java.util.ArrayList;
 
-import model.CardProb;
-import model.Data;
 import model.cardDataTypes.*;
 import model.sumDataTypes.*;
 import view.User;
 
-public class ProbCalculator {
+public class BlackjackProbCalculator {
 	
 	private static int possibleSums = 0;
 	
@@ -35,7 +33,7 @@ public class ProbCalculator {
 		
 		int lessThan = 21 - knownSum;
 		Card[] sumOf21;
-		sumOf21 = deck.to1DArray();
+		sumOf21 = deck.toArray();
 		int lessThan21 = 0;
 		
 		for(int i = 0; i < sumOf21.length; i++) {
@@ -65,7 +63,7 @@ public class ProbCalculator {
 	private static SumCount[] sums(Deck deck, int knownSum) {
 		
 		Card[] sumOf21;
-		sumOf21 = deck.to1DArray();
+		sumOf21 = deck.toArray();
 		ArrayList<SumCount> sumsList = new ArrayList<SumCount>();
 		possibleSums = 0;
 		
@@ -118,21 +116,17 @@ public class ProbCalculator {
 		
 	}
 	
-	private static float cardProbability(Deck deck, char symbol) {
+	private static float cardProbability(Deck deck, String symbol) {
 		
-		Card[][] deckArray = deck.to2DArray();
+		Card[] deckArray = deck.toArray();
 		float numberOfCards = 0;
 		
 		for(int i = 0; i < deckArray.length; i++) {
 			
-			for(int j = 0; j < deckArray[i].length; j++) {
+			if(deckArray[i].getSymbol() == symbol) {
 				
-				if(deckArray[i][j].getSymbol() == symbol) {
-					
-					numberOfCards++;
-					
-					
-				}
+				numberOfCards++;
+				
 				
 			}
 			
@@ -146,25 +140,17 @@ public class ProbCalculator {
 		
 		CardProb[] cardProbsArray = new CardProb[13];
 		
-		cardProbsArray[0] = new CardProb('A', cardProbability(deck, 'A'));
+		cardProbsArray[0] = new CardProb("A", cardProbability(deck, "A"));
 		
 		for(int i = 2; i <= 10; i++) {
 			
-			if(i < 10) {
-				
-				cardProbsArray[i - 1] = new CardProb(Integer.toString(i).charAt(0), cardProbability(deck, Integer.toString(i).charAt(0)));
-				
-			} else {
-				
-				cardProbsArray[i - 1] = new CardProb(Integer.toString(i).charAt(1), cardProbability(deck, Integer.toString(i).charAt(1)));
-				
-			}
+			cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(deck, Integer.toString(i)));
 			
 		}
 		
-		cardProbsArray[10] = new CardProb('J', cardProbability(deck, 'J'));
-		cardProbsArray[11] = new CardProb('Q', cardProbability(deck, 'Q'));
-		cardProbsArray[12] = new CardProb('K', cardProbability(deck, 'K'));
+		cardProbsArray[10] = new CardProb("J", cardProbability(deck, "J"));
+		cardProbsArray[11] = new CardProb("Q", cardProbability(deck, "Q"));
+		cardProbsArray[12] = new CardProb("K", cardProbability(deck, "K"));
 		
 		return cardProbsArray;
 		

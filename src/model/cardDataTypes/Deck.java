@@ -2,160 +2,244 @@ package model.cardDataTypes;
 
 import java.util.ArrayList;
 
+import model.Suit;
+
 public class Deck {
 	
 	//Declare variables
-	SuitSet[] deck;
-	int length = 0;
+	protected ArrayList<Card> unseenDeck = new ArrayList<Card>();
+	protected ArrayList<Card> seenDeck = new ArrayList<Card>();
+	
+	//Create an array with standard strings in it
+	protected static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+	
+	//Create variables that store King, Queen, Jack, and Ace Values
+	final int ACE = 1;
+	final int JACK = 11;
+	final int QUEEN = 12;
+	final int KING = 13;
+	final int JOKER = 14;
 	
 	//A constructor that gives the deck the four suits
-	public Deck() {
+	public Deck(boolean addJokers) {
 		
-		deck = new SuitSet[4];
-		deck[0] = new SuitSet("Spades");
-		deck[1] = new SuitSet("Clubs");
-		deck[2] = new SuitSet("Diamonds");
-		deck[3] = new SuitSet("Hearts");
+		for(int i = 0; i < 52; i++) {
+			
+			Suit suit = Suit.SPADES;
+			
+			//Set the suit according to 'i'
+			switch((i % 13)) {
+			
+			case 0:
+				suit = Suit.SPADES;
+				break;
+			
+			case 1:
+				suit = Suit.CLUBS;
+				break;
+			
+			case 2:
+				suit = Suit.DIAMONDS;
+				break;
+			
+			case 3:
+				suit = Suit.HEARTS;
+				break;
+			
+			}
+			
+			unseenDeck.add(new Card(suit, standardCardSymbols[i], i + 1));
+			
+		}
 		
-		updateLength();
+		//If they want Jokers, add Jokers
+		if(addJokers) {
+			
+			unseenDeck.add(new Card(Suit.JOKER, "JK", 0));
+			unseenDeck.add(new Card(Suit.JOKER, "JK", 0));
+			
+		}
+		
+		unseenDeck.sort(null);
 		
 	}
 	
 	public int length() {
 		
-		updateLength();
-		
-		return length;
-		
-	}
-	
-	private void updateLength() {
-		
-		Card[][] deckArray = to2DArray();
-		length = 0;
-		
-		for(int i = 0; i < deckArray.length; i++) {
-			
-			for(int j = 0; j < deckArray[i].length; j++) {
-				
-				length++;
-				
-			}
-			
-		}
+		return unseenDeck.size();
 		
 	}
 
 	public String toString() {
 		
-		String deckString = "";
-		
-		for(int i = 0; i < deck.length; i++) {
-			
-			deckString += (deck[i].toString() + "\n");
-			
-		}
-		
-		return deckString;
+		return unseenDeck.toString();
 		
 	}
 	
-	public Card[] to1DArray() {
+	public Card[] toArray() {
 		
-		Card[][] deck2DArray = to2DArray();
-		ArrayList<Card> deck1DList = new ArrayList<Card>();
-		
-		for(int i = 0; i < deck2DArray.length; i++) {
-			
-			for(int j = 0; j < deck2DArray[i].length; j++) {
-				
-				deck1DList.add(deck2DArray[i][j]);
-				
-			}
-			
-		}
-		
-		Card[] deck1DArray = deck1DList.toArray(new Card[0]);
-		
-		return deck1DArray;
-		
-	}
-	
-	public Card[][] to2DArray() {
-		
-		Card[][] deckArray = new Card[deck.length][13];
-		
-		for(int i = 0; i < deck.length; i++) {
-			
-			deckArray[i] = deck[i].toArray();
-			
-		}
+		Card[] deckArray = new Card[unseenDeck.size()];
+		unseenDeck.toArray(deckArray);
 		
 		return deckArray;
+		
+	}
+	
+	public int getSymbolValue(String symbol) {
+		
+		if(symbol.equals("A")) {
+			
+			return this.ACE;
+		
+		} else if(symbol.equals("J")) {
+			
+			return this.JACK;
+			
+		} else if(symbol.equals("Q")) {
+			
+			return this.QUEEN;
+			
+		} else if(symbol.equals("K")) {
+			
+			return this.KING;
+			
+		} else if(symbol.equals("JK")) {
+			
+			return this.JOKER;
+			
+		}
+		
+		return Integer.parseInt(symbol);
+		
+	}
+	
+	public void addToDeck(Card card) {
+		
+		unseenDeck.add(card);
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void addToDeck(String suit, String symbol, int value) {
+		
+		addToDeck(new Card(Suit.valueOf(suit), symbol, value));
+		
+	}
+	
+	public void addDeck(Deck deck) {
+		
+		Card[] deckArray = deck.toArray();
+		
+		for(int i = 0; i < deckArray.length; i++) {
+			
+			unseenDeck.add(deckArray[i]);
+			
+		}
+		
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void removeFromDeck(Card card) {
+		
+		if(unseenDeck.contains(card)) {
+			
+			unseenDeck.remove(card);
+			
+		} else if(seenDeck.contains(card)) {
+			
+			seenDeck.remove(card);
+			
+		}
+		
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void removeFromDeck(String suit, String symbol, int value) {
+		
+		removeFromDeck(new Card(Suit.valueOf(suit), symbol, value));
+		
+	}
+	
+	public void add(Card card) {
+		
+		if(seenDeck.contains(card)) {
+			
+			seenDeck.remove(card);
+			unseenDeck.add(card);
+			
+		}
+		
+		unseenDeck.sort(null);
+		
+	}
+	
+	public void add(String suit, String symbol, int value) {
+		
+		add(new Card(Suit.valueOf(suit), symbol, value));
+		
 	}
 	
 	public void reset() {
 		
-		for(int i = 0; i < deck.length; i++) {
+		for(int i = 0; i < seenDeck.size(); i++) {
 			
-			deck[i].reset();
+			unseenDeck.add(seenDeck.get(i));
 			
 		}
 		
-		updateLength();
+		unseenDeck.sort(null);
+		seenDeck.clear();
 		
 	}
 	
 	public void remove(Card card) {
 		
-		for(int i = 0; i < deck.length; i++) {
+		if(unseenDeck.contains(card)) {
 			
-			if((card.getSuit().toUpperCase()).charAt(0) == deck[i].getSymbol()) {
-				
-				deck[i].remove(card);
-				
-			}
+			unseenDeck.remove(card);
+			seenDeck.add(card);
 			
 		}
 		
-		if(to1DArray().length < 1) {
-			
-			reset();
-			
-		}
-		
-		updateLength();
+		unseenDeck.sort(null);
 		
 	}
 	
-	public void remove(String suit, char symbolIn) {
+	public void remove(String suit, String symbol, int value) {
 		
-		String symbol = Character.toString(symbolIn);
-		int value = 0;
+		remove(new Card(Suit.valueOf(suit), symbol, value));
 		
-		if(symbol.equals("K") || symbol.equals("Q") || symbol.equals("J")) {
+	}
+	
+	public void remove(String symbol) {
+		
+		if(unseenDeck.contains(new Card(Suit.SPADES, symbol, getSymbolValue(symbol)))) {
 			
-			value = 10;
+			remove(Suit.SPADES.toString(), symbol, getSymbolValue(symbol));
 			
-		} else {
+		} else if(unseenDeck.contains(new Card(Suit.CLUBS, symbol, getSymbolValue(symbol)))) {
 			
-			value = Integer.parseInt(symbol);
+			remove(Suit.CLUBS.toString(), symbol, getSymbolValue(symbol));
+			
+		} else if(unseenDeck.contains(new Card(Suit.DIAMONDS, symbol, getSymbolValue(symbol)))) {
+			
+			remove(Suit.DIAMONDS.toString(), symbol, getSymbolValue(symbol));
+			
+		} else if(unseenDeck.contains(new Card(Suit.HEARTS, symbol, getSymbolValue(symbol)))) {
+			
+			remove(Suit.HEARTS.toString(), symbol, getSymbolValue(symbol));
 			
 		}
-		
-		remove(new Card(suit, symbolIn, value));
 		
 	}
 	
 	public void undo() {
 		
-		for(int i = 0; i < deck.length; i++) {
-			
-			deck[i].undo();
-			
-		}
-		
-		updateLength();
+		Card undoneCard = seenDeck.remove(seenDeck.size() - 1);
+		unseenDeck.add(undoneCard);
+		unseenDeck.sort(null);
 		
 	}
 	
