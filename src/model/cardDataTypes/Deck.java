@@ -13,13 +13,6 @@ public class Deck {
 	//Create an array with standard strings in it
 	protected static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 	
-	//Create variables that store King, Queen, Jack, and Ace Values
-	final int ACE = 1;
-	final int JACK = 11;
-	final int QUEEN = 12;
-	final int KING = 13;
-	final int JOKER = 14;
-	
 	//A constructor that gives the deck the four suits
 	public Deck(boolean addJokers) {
 		
@@ -52,10 +45,8 @@ public class Deck {
 			
 		}
 		
-		//If they want Jokers, add Jokers
 		if(addJokers) {
 			
-			unseenDeck.add(new Card(Suit.JOKER, "JK", 0));
 			unseenDeck.add(new Card(Suit.JOKER, "JK", 0));
 			
 		}
@@ -82,34 +73,6 @@ public class Deck {
 		unseenDeck.toArray(deckArray);
 		
 		return deckArray;
-		
-	}
-	
-	public int getSymbolValue(String symbol) {
-		
-		if(symbol.equals("A")) {
-			
-			return this.ACE;
-		
-		} else if(symbol.equals("J")) {
-			
-			return this.JACK;
-			
-		} else if(symbol.equals("Q")) {
-			
-			return this.QUEEN;
-			
-		} else if(symbol.equals("K")) {
-			
-			return this.KING;
-			
-		} else if(symbol.equals("JK")) {
-			
-			return this.JOKER;
-			
-		}
-		
-		return Integer.parseInt(symbol);
 		
 	}
 	
@@ -210,28 +173,6 @@ public class Deck {
 	public void remove(String suit, String symbol, int value) {
 		
 		remove(new Card(Suit.valueOf(suit), symbol, value));
-		
-	}
-	
-	public void remove(String symbol) {
-		
-		if(unseenDeck.contains(new Card(Suit.SPADES, symbol, getSymbolValue(symbol)))) {
-			
-			remove(Suit.SPADES.toString(), symbol, getSymbolValue(symbol));
-			
-		} else if(unseenDeck.contains(new Card(Suit.CLUBS, symbol, getSymbolValue(symbol)))) {
-			
-			remove(Suit.CLUBS.toString(), symbol, getSymbolValue(symbol));
-			
-		} else if(unseenDeck.contains(new Card(Suit.DIAMONDS, symbol, getSymbolValue(symbol)))) {
-			
-			remove(Suit.DIAMONDS.toString(), symbol, getSymbolValue(symbol));
-			
-		} else if(unseenDeck.contains(new Card(Suit.HEARTS, symbol, getSymbolValue(symbol)))) {
-			
-			remove(Suit.HEARTS.toString(), symbol, getSymbolValue(symbol));
-			
-		}
 		
 	}
 	
