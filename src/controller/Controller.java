@@ -19,45 +19,27 @@ public class Controller {
 	//Blackjack commands
 	
 	
-	public Object blackjackGame(String command, Object[] args) {
+	public Suit spades() {
 		
-		switch(command) {
+		return Suit.SPADES;
 		
-		//Get the length
-		case "getLength":
-			return bjGame.length();
+	}
+	
+	public Suit clubs() {
 		
-		//Create a way to get a 'Suit' enum
-		case "getSuit":
-			switch(((String) args[0]).toUpperCase()) {
-			
-			case "SPADES":
-				return Suit.SPADES;
-			
-			case "CLUBS":
-				return Suit.CLUBS;
-			
-			case "DIAMONDS":
-				return Suit.DIAMONDS;
-			
-			case "HEARTS":
-				return Suit.HEARTS;
-			
-			default:
-				return null;
-			
-			}
+		return Suit.CLUBS;
 		
-		//Add a card to the deck
-		case "addToDeck":
-			bjGame.addToDeck(new Card((Suit) args[1], (String) args[2], (int) args[3] ));
-			return null;
+	}
+	
+	public Suit diamonds() {
 		
+		return Suit.DIAMONDS;
 		
-		}
+	}
+	
+	public Suit hearts() {
 		
-		return "INVALID";
-		
+		return Suit.HEARTS;
 	}
 	
 	public void remove() {
