@@ -1,11 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-
 import model.cardDataTypes.Card;
 import model.cardDataTypes.Deck;
-import model.sumDataTypes.SumCount;
-import model.sumDataTypes.SumProb;
 import view.User;
 
 public class BlackjackGame extends Deck {
@@ -180,29 +176,18 @@ public class BlackjackGame extends Deck {
 		
 	}
 	
-	private SumCount[] sums(int knownSum) {
+	private void sums(int knownSum) {
 		
 		Card[] sumOf21;
 		sumOf21 = toArray();
-		ArrayList<SumCount> sumsList = new ArrayList<SumCount>();
 		possibleSums = 0;
 		
 		for(int i = 0; i < sumOf21.length; i++) {
 			
 			for(int j = 0; j < sumOf21.length; j++) {
 				
-				SumCount sum = new SumCount(sumOf21[i].getValue() + sumOf21[j].getValue() + knownSum);
-					
-				if(!sumsList.contains(sum)) {
-					
-					sumsList.add(sum);
-					
-				}
-				
 				if(i != j) {
 					
-					sum = sumsList.get(sumsList.indexOf(sum));
-					sum.increment();
 					possibleSums++;
 					
 				}
@@ -210,11 +195,6 @@ public class BlackjackGame extends Deck {
 			}
 			
 		}
-		
-		SumCount[] sumsArray = new SumCount[sumsList.size()];
-		sumsList.toArray(sumsArray);
-		
-		return sumsArray;
 		
 	}
 	
