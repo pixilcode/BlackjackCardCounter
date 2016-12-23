@@ -92,7 +92,7 @@ public class BlackjackGame extends Deck {
 			
 			for(int j = 0; j < sumOf21.length; j++) {
 				
-				if(i != j && sumOf21[i].getValue() + sumOf21[j].getValue() <= lessThan) {
+				if(i != j && sumOf21[i].getValue() + sumOf21[j].getValue() < lessThan) {
 					
 					lessThan21++;
 					
@@ -102,13 +102,81 @@ public class BlackjackGame extends Deck {
 			
 		}
 		
+		sums(knownSum);
+		
 		return lessThan21;
 		
 	}
 	
-	private float possibilityLessThan21(int knownSum) {
+	private int sumsEqualTo21(int knownSum) {
+		
+		int equalTo = 21 - knownSum;
+		Card[] sumOf21;
+		sumOf21 = toArray();
+		int equalTo21 = 0;
+		
+		for(int i = 0; i < sumOf21.length; i++) {
+			
+			for(int j = 0; j < sumOf21.length; j++) {
+				
+				if(i != j && sumOf21[i].getValue() + sumOf21[j].getValue() == equalTo) {
+					
+					equalTo21++;
+					
+				}
+			
+			}
+			
+		}
+		
 		sums(knownSum);
+		
+		return equalTo21;
+		
+	}
+	
+	private int sumsGreaterThan21(int knownSum) {
+		
+		int greaterThan = 21 - knownSum;
+		Card[] sumOf21;
+		sumOf21 = toArray();
+		int greaterThan21 = 0;
+		
+		for(int i = 0; i < sumOf21.length; i++) {
+			
+			for(int j = 0; j < sumOf21.length; j++) {
+				
+				if(i != j && sumOf21[i].getValue() + sumOf21[j].getValue() < greaterThan) {
+					
+					greaterThan21++;
+					
+				}
+			
+			}
+			
+		}
+		
+		sums(knownSum);
+		
+		return greaterThan21;
+		
+	}
+	
+	public float possibilityLessThan21(int knownSum) {
+		
 		return toPercent((float) (sumsLessThan21(knownSum)) / possibleSums);
+		
+	}
+	
+	public float possibilityEqualTo21(int knownSum) {
+		
+		return toPercent((float) (sumsEqualTo21(knownSum)) / possibleSums);
+		
+	}
+	
+	public float possibilityGreaterThan21(int knownSum) {
+		
+		return toPercent((float) (sumsGreaterThan21(knownSum)) / possibleSums);
 		
 	}
 	
@@ -150,25 +218,7 @@ public class BlackjackGame extends Deck {
 		
 	}
 	
-	private SumProb[] sumProbabilities(int knownSum) {
-		
-		SumCount[] sumsArray;
-		sumsArray = sums(knownSum);
-		SumProb[] sumProbs = new SumProb[sumsArray.length];
-		
-		for(int i = 0; i < sumsArray.length; i++) {
-			
-			sumProbs[i] = new SumProb(sumsArray[i].getSum());
-			sumProbs[i].setProb(toPercent((float) (sumsArray[i].getCount()) / possibleSums));
-			
-		}
-		
-		return sumProbs;
-		
-		
-	}
-	
-	private float cardProbability(String symbol) {
+	public float cardProbability(String symbol) {
 		
 		Card[] unseenDeckArray = toArray();
 		float numberOfCards = 0;
@@ -185,34 +235,6 @@ public class BlackjackGame extends Deck {
 		}
 		
 		return toPercent(numberOfCards / length());
-		
-	}
-	
-	private CardProb[] cardProbs(Deck unseenDeck) {
-		
-		CardProb[] cardProbsArray = new CardProb[13];
-		
-		cardProbsArray[0] = new CardProb("A", cardProbability("A"));
-		
-		for(int i = 2; i <= 10; i++) {
-			
-			cardProbsArray[i - 1] = new CardProb(Integer.toString(i), cardProbability(Integer.toString(i)));
-			
-		}
-		
-		cardProbsArray[10] = new CardProb("J", cardProbability("J"));
-		cardProbsArray[11] = new CardProb("Q", cardProbability("Q"));
-		cardProbsArray[12] = new CardProb("K", cardProbability("K"));
-		
-		return cardProbsArray;
-		
-	}
-	
-	public Data calculate(int knownSum) {
-		
-		Data data = new Data(possibilityLessThan21(knownSum), sumProbabilities(knownSum), cardProbs(this));
-		
-		return data;
 		
 	}
 	
