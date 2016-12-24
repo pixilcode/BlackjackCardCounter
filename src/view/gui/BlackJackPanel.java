@@ -10,6 +10,8 @@ import controller.Controller;
 public class BlackJackPanel extends GamePanel{
 	Controller baseController;
 	
+	private final int ACE = 0, TWO = 1, THREE = 2, FOUR = 3, FIVE =4, SIX = 5, SEVEN = 6, EIGHT = 7, NINE = 8, TEN = 9, JACK = 10, QUEEN = 11, KING = 12;
+	
 	private JButton[]addCardButtons;
 	private JButton addAce;
 	private JButton addTwo;
@@ -53,6 +55,7 @@ public class BlackJackPanel extends GamePanel{
 		this.initLabels();
 		
 		this.baseLayout = new SpringLayout();
+		
 		setupPanel();
 		setupLayout();
 		setupListeners();
@@ -223,17 +226,21 @@ public class BlackJackPanel extends GamePanel{
 	
 	private void setupListeners(){
 		for(int i = 0; i < addCardButtons.length; i++){
+			final int button = i;
 			this.addCardButtons[i].addActionListener(new ActionListener(){
-
 				@Override
 				public void actionPerformed(ActionEvent clicked) {
 					//this listener is meant to get the amount of seen cards of each type and add cards to the seen deck of the blackjack game.
 					//Update the percentages of things happening
+					if(addCardButtons[ACE] == addCardButtons[button]){
+						baseController.bjRemoveAce();
+					}else if (addCardButtons[TWO] == addCardButtons[button]){
+						
+					}
 				}
 		
 			});
 		}
-		
 	}
 	
 	@Override

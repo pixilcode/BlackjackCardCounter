@@ -7,11 +7,12 @@ import model.Suit;
 public class Deck {
 	
 	//Declare variables
-	protected ArrayList<Card> unseenDeck = new ArrayList<Card>();
-	protected ArrayList<Card> seenDeck = new ArrayList<Card>();
+	protected ArrayList<Card> unseenDeck;
+	protected ArrayList<Card> seenDeck;
 	
 	//Create an array with standard strings in it
-	protected static final String[] standardCardSymbols = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+	private static Cards cardSymbols;
+	protected static final String[] standardCardSymbols = {"A","1","2","3","4","5","6","7","8","9","10","JACK","QUEEN","KING"};
 	
 	//Create variables that store King, Queen, Jack, and Ace Values
 	final int ACE = 1;
@@ -23,6 +24,9 @@ public class Deck {
 	//A constructor that gives the deck the four suits
 	public Deck(boolean addJokers) {
 		
+		
+		unseenDeck = new ArrayList<Card>();
+		seenDeck = new ArrayList<Card>();
 		for(int i = 0; i < 52; i++) {
 			
 			Suit suit = Suit.SPADES;

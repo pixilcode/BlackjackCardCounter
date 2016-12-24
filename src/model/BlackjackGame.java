@@ -11,12 +11,13 @@ public class BlackjackGame extends Deck {
 	static final int QUEEN = 10;
 	static final int KING = 10;
 	private static int possibleSums = 0;
+	private Card[] cards;
 	
 	public BlackjackGame() {
 		
 		super(false);
 		
-		Card[] cards = (Card[]) unseenDeck.toArray();
+		cards = (Card[]) unseenDeck.toArray();
 		
 		for(int i = 0; i < cards.length; i++) {
 			
@@ -44,9 +45,6 @@ public class BlackjackGame extends Deck {
 			percent = ((float) ((int) (num * 10000))) / 100;
 			
 		} catch(NumberFormatException nfe) {
-			
-			User.println(nfe.getMessage());
-			nfe.printStackTrace();
 			
 		}
 		

@@ -6,16 +6,22 @@ public class Card implements Comparable<Card> {
 	
 	//Declare variables
 	private Suit suit;
-	private String symbol;
+	private Cards symbol;
 	private int value;
 	
 	//Constructor assigns suit, symbol, and value to the card
-	public Card(Suit suit, String symbol, int value) {
+	public Card(Suit suit, Cards symbol, int value) {
 		
 		this.suit = suit;
 		this.symbol = symbol;
 		this.value = value;
 		
+	}
+	
+	public Card(Suit suit, int value){
+		this.suit = suit;
+		this.value = value;
+		this.symbol = symbol.getCard(value);
 	}
 	
 	//Turn the card into a string
@@ -24,14 +30,14 @@ public class Card implements Comparable<Card> {
 	}
 	
 	//Get the suit
-	public String getSuit() {
+	public Suit getSuit() {
 		
-		return suit.toString();
+		return suit;
 		
 	}
 	
 	//Get the symbol
-	public String getSymbol() {
+	public Cards getSymbol() {
 		
 		return symbol;
 		
@@ -90,22 +96,22 @@ public class Card implements Comparable<Card> {
 				return 0;
 				
 			//If this card symbol is 'K', return 1
-			} else if(this.getSymbol() == "K") {
+			} else if(this.getSymbol() == Cards.KING) {
 				
 				return 1;
 				
 			//If this card symbol is 'J', return -1
-			} else if(this.getSymbol() == "J") {
+			} else if(this.getSymbol() == Cards.JACK) {
 				
 				return -1;
 				
 			//If the given card symbol is 'K', return -1	
-			} else if(c.getSymbol() == "K") {
+			} else if(c.getSymbol() == Cards.KING) {
 				
 				return -1;
 				
 			//If the given card symbol is 'J', return 1
-			} else if(c.getSymbol() == "J") {
+			} else if(c.getSymbol() == Cards.JACK) {
 				
 				return 1;
 				
