@@ -25,25 +25,13 @@ public enum Cards {
 		return value;
 	}
 	
-	public Cards getCard(int value){
-		Cards returnType = null;
-		switch(value){
-		case 1: returnType = ACE;
-		case 2: returnType = TWO;
-		case 3: returnType = THREE;
-		case 4: returnType = FOUR;
-		case 5: returnType = FIVE;
-		case 6: returnType = SIX;
-		case 7: returnType = SEVEN;
-		case 8: returnType = EIGHT;
-		case 9: returnType = NINE;
-		case 10: returnType = TEN;
-		case 11: returnType = JACK;
-		case 12: returnType = QUEEN;
-		case 13: returnType = KING;
-		case 0: returnType = JOKER;
-		default: break;
+	public static Cards getCard(int cardValue){
+		Cards returnCard = null;
+		for(Cards card: values()){
+			if(card.value == cardValue){
+				returnCard = card;
+			}
 		}
-		return returnType;
+		return returnCard;
 	}
 }

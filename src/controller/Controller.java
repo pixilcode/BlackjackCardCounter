@@ -9,6 +9,7 @@ public class Controller {
 	double startTime;
 	BlackjackGame blackJackGame;
 	CardFrame cardFrame;
+	Cards cards;
 	
 	public Controller(){
 		cardFrame = new CardFrame(this);
@@ -62,6 +63,30 @@ public class Controller {
 	
 	public void addJack(){
 		blackJackGame.addSeenCard(Cards.JACK);
+	}
+	
+	public void addQueen(){
+		blackJackGame.addSeenCard(Cards.QUEEN);
+	}
+	
+	public void addKing(){
+		blackJackGame.addSeenCard(Cards.KING);
+	}
+	
+	public void addJoker(){
+		blackJackGame.addSeenCard(Cards.JOKER);
+	}
+	
+	public void addCard(int cardValue){
+		blackJackGame.addSeenCard(Cards.getCard(cardValue));
+	}
+	
+	public int getCards(int cardValue){
+		return blackJackGame.getSeenCards(Cards.getCard(cardValue));
+	}
+	
+	public double getWinningPercent(){
+		return blackJackGame.getWinningChancePercent();
 	}
 //	public Suit spades() {
 //		

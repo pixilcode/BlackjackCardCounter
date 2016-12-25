@@ -115,10 +115,10 @@ public class BlackjackGame{
 	private void calculate(){
 		//subtract all the tens
 		for(int i = 10; i < 14; i++)
-			runningCount -= seenDeck.hasCards(cards.getCard(i));
+			runningCount -= seenDeck.hasCards(Cards.values()[i]);
 		//subtract add all the 2-6's
 		for(int i = 2; i < 7; i ++)
-			runningCount += seenDeck.hasCards(cards.getCard(i));
+			runningCount += seenDeck.hasCards(Cards.values()[i]);
 		trueCount = ((double)runningCount/(double)decks);
 		this.winningChancePercent = trueCount/20;
 		this.losingChancePercent = 1 -winningChancePercent;

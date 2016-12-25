@@ -232,11 +232,7 @@ public class BlackJackPanel extends GamePanel{
 				public void actionPerformed(ActionEvent clicked) {
 					//this listener is meant to get the amount of seen cards of each type and add cards to the seen deck of the blackjack game.
 					//Update the percentages of things happening
-					if(addCardButtons[ACE] == addCardButtons[button]){
-						baseController.bjRemoveAce();
-					}else if (addCardButtons[TWO] == addCardButtons[button]){
-						
-					}
+						baseController.addCard(button +1);
 				}
 		
 			});
