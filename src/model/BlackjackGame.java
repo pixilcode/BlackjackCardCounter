@@ -5,16 +5,28 @@ import model.cardDataTypes.*;
 import view.*;
 
 public class BlackjackGame{
-	static final int ACE = 1;
-	static final int JACK = 10;
-	static final int QUEEN = 10;
-	static final int KING = 10;
+	private static final int ACE = 1;
+	private static final int JACK = 10;
+	private static final int QUEEN = 10;
+	private static final int KING = 10;
 	
-	CardDeck seenDeck;
-	CardDeck unseenDeck;
-	CardDeck cardsInHand;
+	private int currentSum;
+	private int likleySum;
+	private double likleySumPercent;
+	private double losingChancePercent;
+	private double winningChancePercent;
+	
+	private CardDeck seenDeck;
+	private CardDeck unseenDeck;
+	private CardDeck cardsInHand;
 	
 	public BlackjackGame(){
+		currentSum = 0;
+		likleySum =0;
+		likleySumPercent = 0;
+		losingChancePercent = 0;
+		winningChancePercent = 0;
+		
 		seenDeck = new CardDeck();
 		unseenDeck = new CardDeck();
 		cardsInHand = new CardDeck();
@@ -22,13 +34,13 @@ public class BlackjackGame{
 	}
 	
 	private static float toPercent(float num) {
-	float percent = 0;	
-	try {
-		percent = ((float) ((int) (num * 10000))) / 100;
-	} catch(NumberFormatException nfe) {
+		float percent = 0;	
+		try {
+			percent = ((float) ((int) (num * 10000))) / 100;
+		} catch(NumberFormatException nfe) {
 		
-	}
-	return percent;
+		}
+		return percent;
 	}
 	
 	public void addCardToHand(Cards card){
@@ -47,6 +59,25 @@ public class BlackjackGame{
 		return seenCards;
 	}
 	
+	public int getCurrentSum(){
+		return this.currentSum;
+	}
+	
+	public double getWinningChancePercent(){
+		return this.winningChancePercent;
+	}
+	
+	public double getLosingChancePercent(){
+		return this.losingChancePercent;
+	}
+	
+	public double getNextLikleySumPercent(){
+		return this.likleySumPercent;
+	}
+	
+	public int getNextLikleySum(){
+		return this.likleySum;
+	}
 	
 }
 
