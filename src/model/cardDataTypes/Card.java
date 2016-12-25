@@ -49,7 +49,7 @@ public class Card{
 	//Get the symbol
 	public Cards getSymbol() {
 		
-		return symbol;
+		return this.symbol;
 		
 	}
 	

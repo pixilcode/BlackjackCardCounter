@@ -93,19 +93,28 @@ public class CardDeck {
 	public Card removeCard(Cards card){
 		Card returnCard = new Card();
 		for(Card cardInDeck:baseDeck){
-			if(cardInDeck.getSymbol().equals(card));//this is npe because there are null spots in the array list that need to be fixed
-//				returnCard.equals(cardInDeck);
-//				baseDeck.remove(cardInDeck);
-		}
+			if(!(card.equals(null))){
+				if(!cardInDeck.equals(null)){
+					if(cardInDeck.getSymbol().equals(card));//this is npe because there are null spots in the array list that need to be fixed
+					returnCard.equals(cardInDeck);
+					baseDeck.remove(cardInDeck);
+					}
+				}
+			}
+			
 		return returnCard;
 	}
 	
 	public Card removeCard(Suit suit, Cards card){
 		Card returnCard = new Card();
 		for(Card cardInDeck:baseDeck){
-			if(cardInDeck.getSuit().equals(suit) && cardInDeck.getSymbol().equals(card))
-				returnCard.equals(cardInDeck);
-				baseDeck.remove(cardInDeck);
+			if(!(card.equals(null))){
+				if(!cardInDeck.equals(null)){
+					if(cardInDeck.getSuit().equals(suit) && cardInDeck.getSymbol().equals(card))
+						returnCard.equals(cardInDeck);
+						baseDeck.remove(cardInDeck);
+				}
+			}
 		}
 		return returnCard;
 	}
