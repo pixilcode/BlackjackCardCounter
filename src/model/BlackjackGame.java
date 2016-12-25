@@ -5,38 +5,69 @@ import model.cardDataTypes.*;
 import view.*;
 
 public class BlackjackGame{
+	//hi-lo card counting values
+	enum HILO{// values to keep track of the likleyness of winning https://www.blackjackapprenticeship.com/resources/how-to-count-cards/
+		TEN(-1),
+		ACE(-1),
+		JACK(-1),
+		QUEEN(-1),
+		KING(-1),
+		TWO(+1),
+		THREE(+1),
+		FOUR(+1),
+		FIVE(+1),
+		SIX(+1),
+		SEVEN(0),
+		EIGHT(0),
+		NINE(0);
+		private final int value;
+		HILO(int value){
+			this.value = value;
+		}
+		public int getValue(){
+			return this.value;
+		}
+	}
 	private static final int ACE = 1;
 	private static final int JACK = 10;
 	private static final int QUEEN = 10;
 	private static final int KING = 10;
 	
+	private int decks;
 	private int currentSum;
 	private int likleySum;
+	private int runningCount;//extreemist posible running count in one deck is 20 & -20
 	private double likleySumPercent;
 	private double losingChancePercent;
 	private double winningChancePercent;
+	private double trueCount;// higher the true count more likley to win
 	
 	private CardDeck seenDeck;
 	private CardDeck unseenDeck;
 	private CardDeck cardsInHand;
+	private Cards cards;
+	private Suit suit;
 	
 	public BlackjackGame(){
+		decks = 1;
 		currentSum = 0;
 		likleySum =0;
+		runningCount = 0;
 		likleySumPercent = 0;
 		losingChancePercent = 0;
 		winningChancePercent = 0;
+		trueCount = 0;
 		
 		seenDeck = new CardDeck();
-		unseenDeck = new CardDeck();
+		unseenDeck = new CardDeck(decks);
 		cardsInHand = new CardDeck();
 		unseenDeck.addDeck();
 	}
 	
-	private static float toPercent(float num) {
-		float percent = 0;	
+	private static double toPercent(double num) {
+		double percent = 0;	
 		try {
-			percent = ((float) ((int) (num * 10000))) / 100;
+			percent = ((double) ((int) (num * 10000))) / 100;
 		} catch(NumberFormatException nfe) {
 		
 		}
@@ -44,12 +75,14 @@ public class BlackjackGame{
 	}
 	
 	public void addCardToHand(Cards card){
+		calculate();
 		Card newCard = unseenDeck.removeCard(card);
 		cardsInHand.addCard(newCard);
 		seenDeck.addCard(newCard);
 	}
 	
 	public void addSeenCard(Cards card){
+		calculate();
 		seenDeck.addCard(unseenDeck.removeCard(card));
 	}
 	
@@ -77,6 +110,18 @@ public class BlackjackGame{
 	
 	public int getNextLikleySum(){
 		return this.likleySum;
+	}
+	
+	private void calculate(){
+		//subtract all the tens
+		for(int i = 10; i < 14; i++)
+			runningCount -= seenDeck.hasCards(cards.getCard(i));
+		//subtract add all the 2-6's
+		for(int i = 2; i < 7; i ++)
+			runningCount += seenDeck.hasCards(cards.getCard(i));
+		trueCount = ((double)runningCount/(double)decks);
+		this.winningChancePercent = trueCount/20;
+		this.losingChancePercent = 1 -winningChancePercent;
 	}
 	
 }

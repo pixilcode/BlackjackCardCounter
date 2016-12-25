@@ -14,7 +14,7 @@ public enum Cards {
 	JACK(11),
 	QUEEN(12),
 	KING(13),
-	JOKER(0);
+	JOKER(14);
 	
 	private final int value;
 	private Cards(int value){
