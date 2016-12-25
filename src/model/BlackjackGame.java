@@ -10,10 +10,15 @@ public class BlackjackGame{
 	static final int QUEEN = 10;
 	static final int KING = 10;
 	
-	CardDeck deck;
+	CardDeck seenDeck;
+	CardDeck unseenDeck;
+	CardDeck cardsInHand;
 	
 	public BlackjackGame(){
-		deck = new CardDeck();
+		seenDeck = new CardDeck();
+		unseenDeck = new CardDeck();
+		cardsInHand = new CardDeck();
+		unseenDeck.addDeck();
 	}
 	
 	private static float toPercent(float num) {
@@ -23,12 +28,26 @@ public class BlackjackGame{
 	} catch(NumberFormatException nfe) {
 		
 	}
-	
-	
-	
 	return percent;
+	}
 	
-}
+	public void addCardToHand(Cards card){
+		Card newCard = unseenDeck.removeCard(card);
+		cardsInHand.addCard(newCard);
+		seenDeck.addCard(newCard);
+	}
+	
+	public void addSeenCard(Cards card){
+		seenDeck.addCard(unseenDeck.removeCard(card));
+	}
+	
+	public int getSeenCards(Cards card){
+		int seenCards = 0;
+		seenCards = seenDeck.hasCards(card);
+		return seenCards;
+	}
+	
+	
 }
 
 

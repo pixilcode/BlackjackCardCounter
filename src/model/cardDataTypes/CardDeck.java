@@ -10,17 +10,18 @@ public class CardDeck {
 	private boolean hasJokers;
 	private short decksInDeck;
 	
-	//default constructor
+	/*
+	 * default constructor default empty
+	 */
 	public CardDeck(){
 		this.hasJokers = false;
-		this.decksInDeck = 1;
-		initDeck();
+		this.decksInDeck = 0;
+		this.baseDeck = new ArrayList<Card>();
 	}
 	//if the deck has jokers
 	public CardDeck(boolean hasJokers){
 		this();
 		this.hasJokers = hasJokers;
-		initDeck();
 	}
 	//if there is more than one deck
 	public CardDeck(int decks){
@@ -80,8 +81,33 @@ public class CardDeck {
 		baseDeck.add(card);
 	}
 	
-	public void removeCard(Card card){
-		baseDeck.remove(card);
+	public Card removeCard(Card card){
+		Card returnCard = new Card();
+		if(baseDeck.contains(card)){
+			returnCard.equals(card);
+			baseDeck.remove(card);
+		}
+		return returnCard;
+	}
+	
+	public Card removeCard(Cards card){
+		Card returnCard = new Card();
+		for(Card cardInDeck:baseDeck){
+			if(cardInDeck.getSymbol().equals(card))
+				returnCard.equals(cardInDeck);
+				baseDeck.remove(cardInDeck);
+		}
+		return returnCard;
+	}
+	
+	public Card removeCard(Suit suit, Cards card){
+		Card returnCard = new Card();
+		for(Card cardInDeck:baseDeck){
+			if(cardInDeck.getSuit().equals(suit) && cardInDeck.getSymbol().equals(card))
+				returnCard.equals(cardInDeck);
+				baseDeck.remove(cardInDeck);
+		}
+		return returnCard;
 	}
 	
 	public boolean hasCard(Card card){

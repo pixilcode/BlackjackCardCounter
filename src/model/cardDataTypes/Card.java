@@ -9,6 +9,13 @@ public class Card implements Comparable<Card> {
 	private Cards symbol;
 	private int value;
 	
+	//default constructor
+	public Card(){
+		this.suit = null;
+		this.symbol = null;
+		this.value = (Integer) null;
+	}
+	
 	//Constructor assigns suit, symbol, and value to the card
 	public Card(Suit suit, Cards symbol, int value) {
 		
