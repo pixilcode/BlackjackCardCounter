@@ -11,6 +11,7 @@ public class Card{
 	
 	//default constructor
 	public Card(){
+		value = 0;
 	}
 	
 	//Constructor assigns suit, symbol, and value to the card
@@ -19,13 +20,18 @@ public class Card{
 		this.suit = suit;
 		this.symbol = symbol;
 		this.value = value;
-		
 	}
 	
 	public Card(Suit suit, int value){
 		this.suit = suit;
 		this.value = value;
 		this.symbol = Cards.getCard(value);
+	}
+	
+	public Card(Cards symbol){
+		this.suit = null;
+		this.symbol = symbol;
+		this.value = symbol.getValue();
 	}
 	
 	//Turn the card into a string

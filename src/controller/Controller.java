@@ -18,7 +18,7 @@ public class Controller {
 	}
 	
 	public void start(){
-		
+		this.addCard(1);
 	}
 	
 	public void addAce(){

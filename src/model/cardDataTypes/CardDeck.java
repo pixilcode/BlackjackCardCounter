@@ -93,9 +93,9 @@ public class CardDeck {
 	public Card removeCard(Cards card){
 		Card returnCard = new Card();
 		for(Card cardInDeck:baseDeck){
-			if(cardInDeck.getSymbol().equals(card))
-				returnCard.equals(cardInDeck);
-				baseDeck.remove(cardInDeck);
+			if(cardInDeck.getSymbol().equals(card));//this is npe because there are null spots in the array list that need to be fixed
+//				returnCard.equals(cardInDeck);
+//				baseDeck.remove(cardInDeck);
 		}
 		return returnCard;
 	}
