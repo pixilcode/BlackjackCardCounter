@@ -45,7 +45,7 @@ public class BlackjackGame{
 	private CardDeck seenDeck;
 	private CardDeck unseenDeck;
 	private CardDeck cardsInHand;
-	private Cards cards;
+	private CardSymbols cards;
 	private Suit suit;
 	
 	public BlackjackGame(){
@@ -74,19 +74,19 @@ public class BlackjackGame{
 		return percent;
 	}
 	
-	public void addCardToHand(Cards card){
+	public void addCardToHand(CardSymbols card){
 		calculate();
 		Card newCard = unseenDeck.removeCard(card);
 		cardsInHand.addCard(newCard);
 		seenDeck.addCard(newCard);
 	}
 	
-	public void addSeenCard(Cards card){
+	public void addSeenCard(CardSymbols card){
 		calculate();
 		seenDeck.addCard(unseenDeck.removeCard(card));
 	}
 	
-	public int getSeenCards(Cards card){
+	public int getSeenCards(CardSymbols card){
 		int seenCards = 0;
 		seenCards = seenDeck.hasCards(card);
 		return seenCards;
@@ -115,10 +115,10 @@ public class BlackjackGame{
 	private void calculate(){
 		//subtract all the tens
 		for(int i = 10; i < 14; i++)
-			runningCount -= seenDeck.hasCards(Cards.values()[i]);
+			runningCount -= seenDeck.hasCards(CardSymbols.values()[i]);
 		//subtract add all the 2-6's
 		for(int i = 2; i < 7; i ++)
-			runningCount += seenDeck.hasCards(Cards.values()[i]);
+			runningCount += seenDeck.hasCards(CardSymbols.values()[i]);
 		trueCount = ((double)runningCount/(double)decks);
 		this.winningChancePercent = trueCount/20;
 		this.losingChancePercent = 1 -winningChancePercent;

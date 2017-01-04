@@ -2,8 +2,6 @@ package model.cardDataTypes;
 
 import java.util.ArrayList;
 
-import model.Suit;
-
 //public class Deck {
 //	
 //	//Declare variables

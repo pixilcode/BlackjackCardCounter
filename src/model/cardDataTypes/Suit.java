@@ -1,4 +1,4 @@
-package model;
+package model.cardDataTypes;
 
 public enum Suit {
 	

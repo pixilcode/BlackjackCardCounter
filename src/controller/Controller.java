@@ -9,7 +9,7 @@ public class Controller {
 	double startTime;
 	BlackjackGame blackJackGame;
 	CardFrame cardFrame;
-	Cards cards;
+	CardSymbols cards;
 	
 	public Controller(){
 		cardFrame = new CardFrame(this);
@@ -22,67 +22,67 @@ public class Controller {
 	}
 	
 	public void addAce(){
-		blackJackGame.addSeenCard(Cards.ACE);
+		blackJackGame.addSeenCard(CardSymbols.ACE);
 	}
 	
 	public void addTwo(){
-		blackJackGame.addSeenCard(Cards.TWO);
+		blackJackGame.addSeenCard(CardSymbols.TWO);
 	}
 	
 	public void addThree(){
-		blackJackGame.addSeenCard(Cards.THREE);
+		blackJackGame.addSeenCard(CardSymbols.THREE);
 	}
 	
 	public void addFour(){
-		blackJackGame.addSeenCard(Cards.FOUR);
+		blackJackGame.addSeenCard(CardSymbols.FOUR);
 	}
 	
 	public void addFive(){
-		blackJackGame.addSeenCard(Cards.FIVE);
+		blackJackGame.addSeenCard(CardSymbols.FIVE);
 	}
 	
 	public void addSix(){
-		blackJackGame.addSeenCard(Cards.SIX);
+		blackJackGame.addSeenCard(CardSymbols.SIX);
 	}
 	
 	public void addSeven(){
-		blackJackGame.addSeenCard(Cards.SEVEN);
+		blackJackGame.addSeenCard(CardSymbols.SEVEN);
 	}
 	
 	public void addEight(){
-		blackJackGame.addSeenCard(Cards.EIGHT);
+		blackJackGame.addSeenCard(CardSymbols.EIGHT);
 	}
 	
 	public void addNine(){
-		blackJackGame.addSeenCard(Cards.NINE);
+		blackJackGame.addSeenCard(CardSymbols.NINE);
 	}
 	
 	public void addTen(){
-		blackJackGame.addSeenCard(Cards.TEN);
+		blackJackGame.addSeenCard(CardSymbols.TEN);
 	}
 	
 	public void addJack(){
-		blackJackGame.addSeenCard(Cards.JACK);
+		blackJackGame.addSeenCard(CardSymbols.JACK);
 	}
 	
 	public void addQueen(){
-		blackJackGame.addSeenCard(Cards.QUEEN);
+		blackJackGame.addSeenCard(CardSymbols.QUEEN);
 	}
 	
 	public void addKing(){
-		blackJackGame.addSeenCard(Cards.KING);
+		blackJackGame.addSeenCard(CardSymbols.KING);
 	}
 	
 	public void addJoker(){
-		blackJackGame.addSeenCard(Cards.JOKER);
+		blackJackGame.addSeenCard(CardSymbols.JOKER);
 	}
 	
 	public void addCard(int cardValue){
-		blackJackGame.addSeenCard(Cards.getCard(cardValue));
+		blackJackGame.addSeenCard(CardSymbols.getCard(cardValue));
 	}
 	
 	public int getCards(int cardValue){
-		return blackJackGame.getSeenCards(Cards.getCard(cardValue));
+		return blackJackGame.getSeenCards(CardSymbols.getCard(cardValue));
 	}
 	
 	public double getWinningPercent(){

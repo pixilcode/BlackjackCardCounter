@@ -2,8 +2,6 @@ package model.cardDataTypes;
 
 import java.util.ArrayList;
 
-import model.Suit;
-
 public class CardDeck {
 	//place to name variables
 	private ArrayList<Card> baseDeck;
@@ -63,8 +61,8 @@ public class CardDeck {
 			}
 		}
 		if(hasJokers){
-			baseDeck.add(new Card(Suit.JOKER,Cards.JOKER,0));
-			baseDeck.add(new Card(Suit.JOKER,Cards.JOKER,0));
+			baseDeck.add(new Card(Suit.JOKER,CardSymbols.JOKER,0));
+			baseDeck.add(new Card(Suit.JOKER,CardSymbols.JOKER,0));
 		}
 	}
 	
@@ -90,7 +88,7 @@ public class CardDeck {
 		return returnCard;
 	}
 	
-	public Card removeCard(Cards card){
+	public Card removeCard(CardSymbols card){
 		Card returnCard = new Card();
 		for(Card cardInDeck:baseDeck){
 			if(!(card.equals(null))){
@@ -105,7 +103,7 @@ public class CardDeck {
 		return returnCard;
 	}
 	
-	public Card removeCard(Suit suit, Cards card){
+	public Card removeCard(Suit suit, CardSymbols card){
 		Card returnCard = new Card();
 		for(Card cardInDeck:baseDeck){
 			if(!(card.equals(null))){
@@ -134,7 +132,7 @@ public class CardDeck {
 		return cardsInDeck;
 	}
 	
-	public int hasCards(Cards card){
+	public int hasCards(CardSymbols card){
 		int cardsInDeck = 0;
 		for(Card cardInDeck: baseDeck){
 			if(cardInDeck.getSymbol().equals(card));
@@ -142,7 +140,7 @@ public class CardDeck {
 		return cardsInDeck;
 	}
 	
-	public int hasCards(Suit suit, Cards card){
+	public int hasCards(Suit suit, CardSymbols card){
 		int cardsInDeck = 0;
 		for(Card cardInDeck: baseDeck){
 			if(cardInDeck.getSuit().equals(suit) && cardInDeck.getSymbol().equals(card))

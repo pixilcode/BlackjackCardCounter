@@ -1,6 +1,6 @@
 package model.cardDataTypes;
 
-public enum Cards {
+public enum CardSymbols {
 	ACE(1),
 	TWO(2),
 	THREE(3),
@@ -17,7 +17,7 @@ public enum Cards {
 	JOKER(14);
 	
 	private final int value;
-	private Cards(int value){
+	private CardSymbols(int value){
 		this.value = value;
 	}
 	
@@ -25,9 +25,9 @@ public enum Cards {
 		return value;
 	}
 	
-	public static Cards getCard(int cardValue){
-		Cards returnCard = null;
-		for(Cards card: values()){
+	public static CardSymbols getCard(int cardValue){
+		CardSymbols returnCard = null;
+		for(CardSymbols card: values()){
 			if(card.value == cardValue){
 				returnCard = card;
 			}

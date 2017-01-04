@@ -1,12 +1,10 @@
 package model.cardDataTypes;
 
-import model.Suit;
-
 public class Card{
 	
 	//Declare variables
 	private Suit suit;
-	private Cards symbol;
+	private CardSymbols symbol;
 	private int value;
 	
 	//default constructor
@@ -15,7 +13,7 @@ public class Card{
 	}
 	
 	//Constructor assigns suit, symbol, and value to the card
-	public Card(Suit suit, Cards symbol, int value) {
+	public Card(Suit suit, CardSymbols symbol, int value) {
 		
 		this.suit = suit;
 		this.symbol = symbol;
@@ -25,10 +23,10 @@ public class Card{
 	public Card(Suit suit, int value){
 		this.suit = suit;
 		this.value = value;
-		this.symbol = Cards.getCard(value);
+		this.symbol = CardSymbols.getCard(value);
 	}
 	
-	public Card(Cards symbol){
+	public Card(CardSymbols symbol){
 		this.suit = null;
 		this.symbol = symbol;
 		this.value = symbol.getValue();
@@ -47,7 +45,7 @@ public class Card{
 	}
 	
 	//Get the symbol
-	public Cards getSymbol() {
+	public CardSymbols getSymbol() {
 		
 		return this.symbol;
 		
